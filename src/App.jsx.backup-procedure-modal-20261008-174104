@@ -1,0 +1,1220 @@
+﻿import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+
+// Navigation Component
+function Navbar() {
+  const [visible, setVisible] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const updateNavbar = () => {
+      const procedures = document.getElementById('procedures');
+
+      if (!procedures) {
+        setVisible(false);
+        return;
+      }
+
+      const proceduresTop = procedures.offsetTop;
+
+      setVisible(window.scrollY >= proceduresTop - 1);
+    };
+
+    updateNavbar();
+
+    window.addEventListener(
+      'scroll',
+      updateNavbar,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'resize',
+      updateNavbar
+    );
+
+    return () => {
+      window.removeEventListener(
+        'scroll',
+        updateNavbar
+      );
+
+      window.removeEventListener(
+        'resize',
+        updateNavbar
+      );
+    };
+  }, []);
+
+  const navLinks = [
+    ['Procedures', 'procedures'],
+    ['Approach', 'approach'],
+    ['Surgeon', 'surgeon'],
+    ['Results', 'results'],
+    ['Consultation', 'consultation'],
+    ['Journal', 'journal']
+  ];
+
+  const goToSection = (id) => {
+    setMobileMenuOpen(false);
+
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
+  return (
+    <nav
+      className={`navbar ${
+        visible ? 'navbar-visible' : 'navbar-hidden'
+      }`}
+      id="navbar"
+      aria-hidden={!visible}
+    >
+      <div className="container navbar-content">
+
+        <button
+          type="button"
+          className="navbar-brand"
+          onClick={() => goToSection('procedures')}
+          tabIndex={visible ? 0 : -1}
+        >
+          AURELIS
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-menu-btn ${
+            mobileMenuOpen ? 'mobile-menu-active' : ''
+          }`}
+          aria-label="Toggle navigation menu"
+          onClick={() =>
+            setMobileMenuOpen((open) => !open)
+          }
+          tabIndex={visible ? 0 : -1}
+        >
+          <span className="hamburger"></span>
+        </button>
+
+        <ul
+          className={`nav-links ${
+            mobileMenuOpen ? 'active' : ''
+          }`}
+        >
+          {navLinks.map(([label, id]) => (
+            <li key={id}>
+              <button
+                type="button"
+                className="navbar-link"
+                onClick={() => goToSection(id)}
+                tabIndex={visible ? 0 : -1}
+              >
+                {label}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+    </nav>
+  );
+}
+
+// Hero Section Component with GSAP Animations
+function AnimatedHeroText({ text }) {
+  return (
+    <>
+      {text.split(' ').map((word, index) => (
+        <span
+          className="aurelis-title-word"
+          style={{ '--word-index': index }}
+          key={`${word}-${index}`}
+        >
+          {word}
+        </span>
+      ))}
+    </>
+  );
+}
+function Hero() {
+  const heroRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    console.log('AURELIS REACT SCRUBBER ACTIVE');
+
+    let lastFrame = -1;
+
+    const intervalId = window.setInterval(() => {
+      const hero = heroRef.current;
+      const canvas = canvasRef.current;
+
+      if (!hero || !canvas) return;
+
+      const maxScroll = Math.max(
+        hero.offsetHeight - window.innerHeight,
+        1
+      );
+
+      const progress = Math.max(
+        0,
+        Math.min(
+          1,
+          -hero.getBoundingClientRect().top / maxScroll
+        )
+      );
+
+      const frame = Math.max(
+        1,
+        Math.min(
+          120,
+          Math.round(
+            1 + progress * (120 - 1)
+          )
+        )
+      );
+
+      // heynuff-style seamless motion:
+      // content remains present through the cinematic sequence,
+      // then exits as the hero gives way to Procedures.
+      const motionPhase =
+        progress >= 0.78
+          ? 'exit'
+          : 'enter';
+
+      if (hero.dataset.motionPhase !== motionPhase) {
+        hero.dataset.motionPhase = motionPhase;
+      }
+
+      if (frame === lastFrame) return;
+
+      lastFrame = frame;
+
+      const img = new Image();
+
+      img.onload = () => {
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) return;
+
+        const dpr = Math.min(
+          window.devicePixelRatio || 1,
+          2
+        );
+
+        const cssWidth = canvas.clientWidth;
+        const cssHeight = canvas.clientHeight;
+
+        if (!cssWidth || !cssHeight) return;
+
+        canvas.width = Math.round(cssWidth * dpr);
+        canvas.height = Math.round(cssHeight * dpr);
+
+        const cw = canvas.width;
+        const ch = canvas.height;
+
+        const iw = img.naturalWidth;
+        const ih = img.naturalHeight;
+
+        const canvasRatio = cw / ch;
+        const imageRatio = iw / ih;
+
+        let sx = 0;
+        let sy = 0;
+        let sw = iw;
+        let sh = ih;
+
+        if (imageRatio > canvasRatio) {
+          sw = ih * canvasRatio;
+          sx = (iw - sw) / 2;
+        } else {
+          sh = iw / canvasRatio;
+          sy = (ih - sh) / 2;
+        }
+
+        ctx.clearRect(0, 0, cw, ch);
+
+        ctx.drawImage(
+          img,
+          sx,
+          sy,
+          sw,
+          sh,
+          0,
+          0,
+          cw,
+          ch
+        );
+      };
+
+      img.onerror = () => {
+        console.warn(
+          'AURELIS frame failed:',
+          frame
+        );
+      };
+
+      img.src =
+        `/assets/hero-frames/frame-${String(frame).padStart(4, '0')}.webp`;
+
+    }, 50);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <section ref={heroRef} className="hero" id="hero" data-motion-phase="enter">
+      <div className="hero-stage">
+
+        <div className="hero-brand-lockup">
+          <div className="hero-brand aurelis-brand-enter" aria-label="AURELIS">
+            AURELIS
+          </div>
+
+          <div className="hero-brand-copy aurelis-copy-enter aurelis-brand-copy-delay">
+            <span className="brand-line">
+              A considered approach to change,
+            </span>
+
+            <span className="brand-line">
+              guided by proportion, restraint, and what still feels like you.
+            </span>
+          </div>
+        </div>
+
+        <canvas
+          ref={canvasRef}
+          className="hero-canvas"
+          aria-hidden="true"
+        />
+
+        <div className="hero-overlay" />
+
+        <div className="hero-content">
+
+          <p className="hero-eyebrow">
+            AURELIS COSMETIC SURGERY
+          </p>
+
+          <h1 className="hero-title"><AnimatedHeroText text="Subtle change. Carefully considered." /></h1>
+
+          <p className="hero-subtitle aurelis-copy-enter">
+            Cosmetic surgery should never feel rushed, generic, or overdone. Every decision begins with your features, your goals, and what will still feel like you.
+          </p>
+
+          <div className="hero-cta-group aurelis-copy-enter aurelis-copy-delay">
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() =>
+                scrollToSection('consultation')
+              }
+            >
+              Book Online Consultation
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() =>
+                scrollToSection('procedures')
+              }
+            >
+              Explore Procedures
+            </button>
+
+          </div>
+        </div>
+
+        <div
+          className="hero-scroll-indicator"
+          aria-hidden="true"
+        >
+          <span>SCROLL</span>
+          <span className="hero-scroll-line" />
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+// Procedure Card Component with Modal
+function ProcedureCard({ title, description, procedureName }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <article className="procedure-card" onClick={() => setIsOpen(true)}>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <button 
+        className="btn btn-secondary"
+        onClick={(e) => { e.stopPropagation(); setIsOpen(true); }}
+      >
+        Learn More
+      </button>
+
+      {/* Modal */}
+      {isOpen && (
+        <>
+          <div className="modal-overlay active" id={`procedureModal-${procedureName}`} role="dialog" aria-modal="true">
+            <div className="modal-content">
+              <button 
+                className="modal-close" 
+                onClick={() => setIsOpen(false)}
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+              
+              <h2>{title}</h2>
+              <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+                {description}
+              </p>
+              
+              <div style={{ 
+                backgroundColor: '#E8E6E1', 
+                padding: '2rem', 
+                borderRadius: '4px',
+                margin: '2rem 0'
+              }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>About {procedureName}</h3>
+                <p style={{ lineHeight: '1.8' }}>
+                  This procedure is carefully planned to enhance your natural features while maintaining harmony and proportion. Our approach focuses on subtle, refined results that complement your unique anatomy.
+                </p>
+              </div>
+
+              <a href="#consultation" className="btn btn-primary">Schedule Consultation</a>
+            </div>
+          </div>
+        </>
+      )}
+    </article>
+  );
+}
+
+// Our Approach Section Component
+function OurApproach() {
+  return (
+    <section className="section-padding approach-section" id="approach">
+      <div className="container">
+        <h2 className="text-center">Our Approach</h2>
+        
+        <div className="approach-grid">
+          <div className="approach-content">
+            <h3>Individual Consultation</h3>
+            <p>Your journey begins with a personalized consultation where we listen, understand, and collaborate on your aesthetic goals.</p>
+            
+            <h3 style={{ marginTop: '2rem' }}>Proportion and Anatomy</h3>
+            <p>We analyze facial harmony and anatomical considerations to ensure treatments enhance rather than mask your natural beauty.</p>
+            
+            <h3 style={{ marginTop: '2rem' }}>Careful Planning</h3>
+            <p>Every procedure is meticulously planned with detailed mapping, ensuring precision and optimal outcomes tailored specifically for you.</p>
+          </div>
+          
+          <div className="approach-content">
+            <h3>Clear Communication</h3>
+            <p>We maintain transparent dialogue throughout your journey, ensuring you understand each step of the process and feel confident in our recommendations.</p>
+            
+            <h3 style={{ marginTop: '2rem' }}>Realistic Expectations</h3>
+            <p>Honest discussions about what is achievable help set meaningful goals that align with your personal vision while respecting medical limitations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Surgeon Section Component
+function MeetTheSurgeon() {
+  return (
+    <section className="section-padding surgeon-section" id="surgeon">
+      <div className="container">
+        <h2 className="text-center">Meet the Cosmetic Surgeon</h2>
+        
+        <div className="surgeon-container">
+          <div className="surgeon-image-placeholder">
+            <span style={{ fontSize: '1.5rem' }}>Surgeon Portrait Placeholder</span>
+          </div>
+          
+          <div className="surgeon-info">
+            <h3 className="surgeon-name">Dr. Elena Vale</h3>
+            <p className="surgeon-title">Cosmetic Surgeon</p>
+            
+            <span className="surgeon-demo-note" style={{ display: 'inline-block', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Demo Identity - For Interface Purposes Only</span>
+            
+            <p className="surgeon-bio">
+              Dr. Elena Vale brings a thoughtful, measured approach to cosmetic surgery, focusing on enhancement that respects and celebrates individual features. With years of experience in surgical planning and execution, she prioritizes natural outcomes that harmonize with your unique anatomy.
+            </p>
+            
+            <p className="surgeon-bio">
+              Her practice philosophy centers on the belief that true beauty emerges from understanding what works for youâ€”not what others expect. Every consultation is an opportunity to explore options that align with your personal vision and lifestyle aspirations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Before & After Slider Component
+function BeforeAfterSlider() {
+  const sliderRef = useRef(null);
+  const [sliderPosition, setSliderPosition] = useState(50);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!sliderRef.current) return;
+      
+      const rect = sliderRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+      setSliderPosition(percentage);
+    };
+
+    const handleTouchMove = (e) => {
+      if (!sliderRef.current) return;
+      
+      const touch = e.touches[0];
+      const rect = sliderRef.current.getBoundingClientRect();
+      const x = touch.clientX - rect.left;
+      const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+      setSliderPosition(percentage);
+    };
+
+    sliderRef.current.addEventListener('mousemove', handleMouseMove);
+    sliderRef.current.addEventListener('touchmove', handleTouchMove);
+
+    return () => {
+      sliderRef.current.removeEventListener('mousemove', handleMouseMove);
+      sliderRef.current.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
+  const handleSliderChange = (e) => {
+    setSliderPosition(e.target.value);
+  };
+
+  return (
+    <section className="section-padding before-after-section" id="results">
+      <div className="container text-center">
+        <h2 className="text-center">Results</h2>
+        
+        <div 
+          ref={sliderRef}
+          className="ba-container" 
+          id="beforeAfterContainer"
+          style={{ cursor: 'ew-resize' }}
+        >
+          <div className="ba-labels">
+            <span className="ba-label">Before</span>
+            <span className="ba-label">After</span>
+          </div>
+          
+          <div 
+            className="ba-image" 
+            id="baImage"
+            style={{ 
+              background: `linear-gradient(to right, #E8E6E1 ${sliderPosition}%, #D4C5B0 ${sliderPosition}%)`
+            }}
+          >
+            <span style={{ fontSize: '1.5rem' }}>Interactive Before & After Slider</span>
+          </div>
+          
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            value={sliderPosition}
+            onChange={handleSliderChange}
+            className="ba-slider"
+            aria-label="Slide to compare before and after results"
+          />
+          
+          <div style={{ position: 'absolute', top: '-8px', left: `${sliderPosition}%`, transform: `translateX(-50%)` }}>
+            &#9664;&#9654;
+          </div>
+        </div>
+        
+        <p className="ba-disclaimer">Demo imagery shown for interface purposes only. Individual results vary.</p>
+      </div>
+    </section>
+  );
+}
+
+// Consultation Form Component with Validation
+function ConsultationForm() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    procedure: '',
+    consultationType: 'video',
+    preferredDate: '',
+    preferredTime: '',
+    note: ''
+  });
+
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    return /^[\d\s\-\(\)]{10,}$/.test(phone.replace(/\D/g, ''));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validation
+    let newErrors = {};
+    
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Please enter your full name';
+    }
+    
+    if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+    
+    if (!formData.procedure) {
+      newErrors.procedure = 'Please select a procedure';
+    }
+    
+    if (!formData.consultationType) {
+      newErrors.consultationType = 'Please select consultation type';
+    }
+    
+    if (!formData.preferredDate) {
+      newErrors.preferredDate = 'Please select a preferred date';
+    }
+    
+    if (!formData.preferredTime) {
+      newErrors.preferredTime = 'Please select a preferred time';
+    }
+
+    setErrors(newErrors);
+    
+    // Check if all errors are resolved
+    const hasErrors = Object.keys(newErrors).length > 0;
+    
+    if (hasErrors) return;
+    
+    // Simulate form submission
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setSuccess(true);
+      
+      // Reset form after success message is shown for a while
+      setTimeout(() => {
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          procedure: '',
+          consultationType: 'video',
+          preferredDate: '',
+          preferredTime: '',
+          note: ''
+        });
+        setSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
+  };
+
+  if (success) {
+    return (
+      <div className="form-container">
+        <div className="modal-overlay active" style={{ background: 'rgba(45, 45, 45, 0.8)' }}>
+          <div className="modal-content success-message">
+            <div className="success-icon">&#10003;</div>
+            <h3>Your consultation request has been received.</h3>
+            <p style={{ fontSize: '1.2rem' }}>Our team will contact you to confirm your appointment.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <section className="section-padding consultation-section" id="consultation">
+      <div className="container">
+        <h2 className="text-center form-header">Book Online Consultation</h2>
+        
+        <form className="form-container" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="fullName" className="form-label">Full Name *</label>
+            <input 
+              type="text" 
+              id="fullName" 
+              name="fullName" 
+              value={formData.fullName}
+              onChange={handleChange}
+              className={`form-input ${errors.fullName ? 'error' : ''}`}
+              placeholder="Enter your full name"
+              required
+            />
+            {errors.fullName && <span className="error-message">{errors.fullName}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email Address *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              value={formData.email}
+              onChange={handleChange}
+              className={`form-input ${errors.email ? 'error' : ''}`}
+              placeholder="your.email@example.com"
+              required
+            />
+            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="phone" className="form-label">Phone Number *</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              value={formData.phone}
+              onChange={handleChange}
+              className={`form-input ${errors.phone ? 'error' : ''}`}
+              placeholder="(555) 123-4567"
+              required
+            />
+            {errors.phone && <span className="error-message">{errors.phone}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="procedure" className="form-label">Procedure of Interest *</label>
+            <select 
+              id="procedure" 
+              name="procedure" 
+              value={formData.procedure}
+              onChange={handleChange}
+              className={`form-select ${errors.procedure ? 'error' : ''}`}
+              required
+            >
+              <option value="">Select a procedure...</option>
+              <option value="rhinoplasty">Rhinoplasty</option>
+              <option value="facelift">Facelift & Neck Lift</option>
+              <option value="blepharoplasty">Blepharoplasty</option>
+              <option value="breast-augmentation">Breast Augmentation</option>
+              <option value="body-contouring">Body Contouring</option>
+            </select>
+            {errors.procedure && <span className="error-message">{errors.procedure}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="consultationType" className="form-label">Consultation Type *</label>
+            <div className="radio-group">
+              <label className="radio-option">
+                <input 
+                  type="radio" 
+                  name="consultationType" 
+                  value="video"
+                  checked={formData.consultationType === 'video'}
+                  onChange={handleChange}
+                  required
+                />
+                Video Consultation
+              </label>
+              <label className="radio-option">
+                <input 
+                  type="radio" 
+                  name="consultationType" 
+                  value="in-person"
+                  checked={formData.consultationType === 'in-person'}
+                  onChange={handleChange}
+                />
+                In-Person Consultation
+              </label>
+            </div>
+            {errors.consultationType && <span className="error-message">{errors.consultationType}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="preferredDate" className="form-label">Preferred Date *</label>
+            <input 
+              type="date" 
+              id="preferredDate" 
+              name="preferredDate" 
+              value={formData.preferredDate}
+              onChange={handleChange}
+              className={`form-input ${errors.preferredDate ? 'error' : ''}`}
+              required
+            />
+            {errors.preferredDate && <span className="error-message">{errors.preferredDate}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="preferredTime" className="form-label">Preferred Time *</label>
+            <select 
+              id="preferredTime" 
+              name="preferredTime" 
+              value={formData.preferredTime}
+              onChange={handleChange}
+              className={`form-select ${errors.preferredTime ? 'error' : ''}`}
+              required
+            >
+              <option value="">Select a time...</option>
+              <option value="morning">Morning (9am - 12pm)</option>
+              <option value="afternoon">Afternoon (12pm - 5pm)</option>
+              <option value="evening">Evening (5pm - 8pm)</option>
+            </select>
+            {errors.preferredTime && <span className="error-message">{errors.preferredTime}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="note" className="form-label">Short Note or Concern</label>
+            <textarea 
+              id="note" 
+              name="note" 
+              value={formData.note}
+              onChange={handleChange}
+              className="form-input"
+              rows="4" 
+              placeholder="Tell us about your goals or concerns..."
+            ></textarea>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              <input type="checkbox" required />
+              I agree to receive a confirmation email and understand that this form is for scheduling purposes only.
+            </label>
+          </div>
+
+          <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Book Consultation</button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+// Article Section Component
+function FeaturedArticle() {
+  return (
+    <section className="section-padding article-section" id="journal">
+      <div className="container">
+        <h2 className="text-center article-header">What to Expect During a Cosmetic Surgery Consultation</h2>
+        
+        <article className="article-container article-content">
+          <p>Your consultation is the foundation of your journey with AURELIS. This comprehensive meeting ensures we understand your unique goals, discuss realistic outcomes, and determine if you're a suitable candidate for the procedures you're considering.</p>
+          
+          <h3>Why the Consultation Matters</h3>
+          <p>The consultation is more than an initial assessmentâ€”it's the beginning of our collaborative partnership. During this meeting, we establish clear communication channels, discuss your aesthetic aspirations, and evaluate whether surgical enhancement aligns with your personal goals.</p>
+          
+          <h3>Discussing Your Goals</h3>
+          <p>We create a safe space for you to express what you're hoping to achieve. Whether it's subtle refinement or more significant changes, we listen carefully to understand the underlying motivations and desired outcomes that matter most to you.</p>
+          
+          <h3>Medical History and Suitability</h3>
+          <p>A thorough review of your medical history ensures your safety and helps us determine which procedures are appropriate for you. We discuss any health conditions, medications, or previous surgeries that may impact treatment planning.</p>
+          
+          <h3>Understanding Options and Limitations</h3>
+          <p>Honesty is central to our practice. We provide detailed information about available options, their benefits, limitations, recovery expectations, and realistic outcomes based on your anatomy and goals.</p>
+          
+          <h3>Questions to Ask</h3>
+          <p>We encourage you to prepare questions about the procedure itself, recovery timeline, potential risks, costs, and what to expect during healing. Your concerns are valid, and we're here to provide clear answers.</p>
+          
+          <h3>What Happens Next</h3>
+          <p>If you feel comfortable moving forward, we'll discuss next steps including treatment planning, scheduling your procedure date, and preparing for surgery. If you need more time to consider, we're happy to schedule a follow-up consultation.</p>
+          
+          <div className="article-cta">
+            <a href="#consultation" className="btn btn-primary">Book an Online Consultation</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+// Final CTA Section Component
+function FinalCTA() {
+  return (
+    <section className="final-cta-section">
+      <div className="container">
+        <p className="final-cta-text">Begin with a conversation.</p>
+        <a href="#consultation" className="btn btn-primary">Book Online Consultation</a>
+      </div>
+    </section>
+  );
+}
+
+// Footer Component
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <h3>AURELIS</h3>
+            <p style={{ color: '#E8E6E1', lineHeight: '1.8' }}>Subtle change. Carefully considered.</p>
+          </div>
+          
+          <div className="footer-links">
+            <h4>Procedures</h4>
+            <ul>
+              <li><a href="#procedures">Rhinoplasty</a></li>
+              <li><a href="#procedures">Facelift & Neck Lift</a></li>
+              <li><a href="#procedures">Blepharoplasty</a></li>
+              <li><a href="#procedures">Breast Augmentation</a></li>
+              <li><a href="#procedures">Body Contouring</a></li>
+            </ul>
+          </div>
+          
+          <div className="footer-links">
+            <h4>Information</h4>
+            <ul>
+              <li><a href="#approach">Our Approach</a></li>
+              <li><a href="#surgeon">Meet the Surgeon</a></li>
+              <li><a href="#journal">Journal</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          
+          <div className="footer-contact">
+            <h4>Contact</h4>
+            <p style={{ color: '#E8E6E1', lineHeight: '1.8' }}>
+              consultations@aurelis.com<br />
+              (555) 123-4567<br />
+              100 Aesthetic Avenue<br />
+              Beverly Hills, CA 90210
+            </p>
+          </div>
+        </div>
+        
+        <div className="footer-bottom">
+          &copy; 2024 AURELIS Cosmetic Surgery. All rights reserved.<br />
+          Demo website for interface purposes only.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// Main App Component
+function App() {
+  return (
+    <div className="app">
+      <Navbar />
+      <Hero />
+      <ProceduresSection />
+      <OurApproach />
+      <MeetTheSurgeon />
+      <BeforeAfterSlider />
+      <ConsultationForm />
+      <FeaturedArticle />
+      <FinalCTA />
+      <Footer />
+    </div>
+  );
+}
+
+// Procedures Section — Editorial Image Gallery
+function ProceduresSection() {
+  const [selectedProcedure, setSelectedProcedure] = useState(null);
+  const [headingVisible, setHeadingVisible] = useState(false);
+  const headingRef = useRef(null);
+
+  const procedures = [
+    {
+      title: 'Rhinoplasty',
+      image: '/assets/procedures/rhinoplasty.png',
+      description:
+        'A refined approach to reshaping the nose while preserving balance with the rest of the face.',
+      points: [
+        'Facial proportion and harmony',
+        'Individualized surgical planning',
+        'Natural-looking refinement'
+      ]
+    },
+    {
+      title: 'Facelift & Neck Lift',
+      image: '/assets/procedures/facelift-necklift.png',
+      description:
+        'Thoughtful facial and neck rejuvenation designed around structure, expression, and proportion.',
+      points: [
+        'Jawline and neck refinement',
+        'Preservation of natural expression',
+        'Carefully planned structural support'
+      ]
+    },
+    {
+      title: 'Blepharoplasty',
+      image: '/assets/procedures/blepharoplasty.png',
+      description:
+        'A precise approach to the eye area that aims to create a more rested, open appearance.',
+      points: [
+        'Upper and lower eyelid assessment',
+        'Subtle eye-area rejuvenation',
+        'Proportion-led planning'
+      ]
+    },
+    {
+      title: 'Breast Augmentation',
+      image: '/assets/procedures/breast-augmentation.png',
+      description:
+        'Personalized enhancement shaped around body proportion, silhouette, and individual goals.',
+      points: [
+        'Proportion-conscious planning',
+        'Individual implant selection',
+        'Balanced silhouette'
+      ]
+    },
+    {
+      title: 'Body Contouring',
+      image: '/assets/procedures/body-contouring.png',
+      description:
+        'Sculptural body refinement focused on proportion, contour, and a balanced overall silhouette.',
+      points: [
+        'Contour-focused planning',
+        'Waist and silhouette refinement',
+        'Individualized treatment strategy'
+      ]
+    }
+  ];
+
+  useEffect(() => {
+    const element = headingRef.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHeadingVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.35
+      }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedProcedure) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setSelectedProcedure(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProcedure]);
+
+  const goToConsultation = () => {
+    setSelectedProcedure(null);
+
+    window.setTimeout(() => {
+      document.getElementById('consultation')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 80);
+  };
+
+  return (
+    <section
+      className="section-padding procedures-section procedures-editorial"
+      id="procedures"
+    >
+      <div className="container">
+        <div
+          ref={headingRef}
+          className={`procedures-heading ${
+            headingVisible ? 'procedures-heading-visible' : ''
+          }`}
+        >
+          <span className="procedures-kicker">
+            AURELIS / PROCEDURES
+          </span>
+
+          <h2>
+            <span
+              className="procedure-heading-word"
+              style={{ '--heading-index': 0 }}
+            >
+              Refinement,
+            </span>
+
+            <span
+              className="procedure-heading-word"
+              style={{ '--heading-index': 1 }}
+            >
+              not
+            </span>
+
+            <span
+              className="procedure-heading-word"
+              style={{ '--heading-index': 2 }}
+            >
+              reinvention.
+            </span>
+          </h2>
+
+          <p>
+            Thoughtful surgical planning designed to enhance balance,
+            preserve character, and keep the result feeling recognizably yours.
+          </p>
+        </div>
+
+        <div className="procedure-gallery">
+          {procedures.map((procedure, index) => (
+            <button
+              type="button"
+              className={`procedure-visual-card procedure-visual-card-${index + 1}`}
+              key={procedure.title}
+              onClick={() => setSelectedProcedure(procedure)}
+              aria-label={`Learn more about ${procedure.title}`}
+            >
+              <span className="procedure-image-frame">
+                <img
+                  src={procedure.image}
+                  alt=""
+                  className="procedure-image"
+                />
+
+                <span className="procedure-image-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <span className="procedure-image-action">
+                  View procedure
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </span>
+
+              <span className="procedure-caption">
+                {procedure.title}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {selectedProcedure && (
+        <div
+          className="procedure-modal-shell"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedProcedure.title}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedProcedure(null);
+            }
+          }}
+        >
+          <button
+            type="button"
+            className="procedure-modal-close"
+            onClick={() => setSelectedProcedure(null)}
+            aria-label="Close procedure"
+          >
+            ×
+          </button>
+
+          <div className="procedure-modal-stage">
+            <div className="procedure-modal-image-wrap">
+              <img
+                src={selectedProcedure.image}
+                alt=""
+                className="procedure-modal-image"
+              />
+            </div>
+
+            <div className="procedure-modal-copy">
+              <span className="procedure-modal-label">
+                AURELIS / PROCEDURE
+              </span>
+
+              <h3>{selectedProcedure.title}</h3>
+
+              <p>{selectedProcedure.description}</p>
+
+              <ul>
+                {selectedProcedure.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+
+              <button
+                type="button"
+                className="procedure-modal-cta"
+                onClick={goToConsultation}
+              >
+                Book Online Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

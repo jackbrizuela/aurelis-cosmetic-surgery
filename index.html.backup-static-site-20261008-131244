@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AURELIS Cosmetic Surgery - Precision, planned around you. A considered approach to cosmetic surgery from first consultation to carefully planned treatment journey." />
+  <title>AURELIS | Cosmetic Surgery</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Fonts - Elegant serif and sans-serif pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base styles */
+    :root {
+      --color-ivory: #FDFBF7;
+      --color-stone: #E8E6E1;
+      --color-graphite: #2D2D2D;
+      --color-champagne: #D4C5B0;
+      --color-skin-warm: #E3DCC9;
+      --color-text-primary: #2D2D2D;
+      --color-text-secondary: #6B6B6B;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-ivory);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text-primary);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* Focus styles for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--color-champagne);
+      outline-offset: 3px;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--color-graphite);
+      color: white;
+      padding: 1rem;
+      z-index: 1000;
+      transition: top 0.3s ease;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Utility classes */
+    .container {
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-padding {
+      padding: 8rem 0;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* Button styles */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--color-graphite);
+      color: var(--color-ivory);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-champagne);
+      color: var(--color-text-primary);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-graphite);
+      border: 1px solid var(--color-graphite);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-graphite);
+      color: var(--color-ivory);
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(253, 251, 247, 0.98);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-graphite);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--color-text-primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--color-champagne);
+    }
+
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .hamburger {
+      width: 28px;
+      height: 2px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-graphite);
+      transition: all 0.3s ease;
+    }
+
+    .hamburger::before {
+      top: -8px;
+    }
+
+    .hamburger::after {
+      bottom: -8px;
+    }
+
+    .mobile-menu-active .hamburger {
+      transform: rotate(45deg);
+    }
+
+    .mobile-menu-active .hamburger::before {
+      top: 0;
+      opacity: 0;
+    }
+
+    .mobile-menu-active .hamburger::after {
+      bottom: 0;
+      transform: rotate(-90deg);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 350vh;
+      overflow: hidden;
+    }
+
+    .hero-video-container {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(45, 45, 45, 0.3) 0%,
+        rgba(28, 28, 28, 0.6) 100%
+      );
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--color-ivory);
+      z-index: 10;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* Procedures Section */
+    .procedures-section {
+      background-color: var(--color-ivory);
+    }
+
+    .procedure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+
+    .procedure-card {
+      background-color: var(--color-stone);
+      padding: 3rem 2.5rem;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .procedure-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .procedure-title {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--color-text-primary);
+    }
+
+    .procedure-description {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* Our Approach Section */
+    .approach-section {
+      background-color: #F7F5EB;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .approach-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-primary);
+    }
+
+    .approach-content p {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Surgeon Section */
+    .surgeon-section {
+      background-color: var(--color-ivory);
+    }
+
+    .surgeon-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .surgeon-image-placeholder {
+      width: 100%;
+      height: 500px;
+      background-color: var(--color-stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+    }
+
+    .surgeon-info h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .surgeon-name {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .surgeon-title {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-champagne);
+      margin-bottom: 2rem;
+    }
+
+    .surgeon-demo-note {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .surgeon-bio {
+      font-family: var(--font-sans);
+      line-height: 2;
+      max-width: 500px;
+    }
+
+    /* Before & After Section */
+    .before-after-section {
+      background-color: #F7F5EB;
+    }
+
+    .ba-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 4rem auto;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .ba-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+    }
+
+    .ba-slider {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: var(--color-graphite);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .ba-labels {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 10;
+    }
+
+    .ba-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: white;
+      opacity: 0.8;
+    }
+
+    .ba-disclaimer {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+    }
+
+    /* Consultation Form Section */
+    .consultation-section {
+      background-color: var(--color-ivory);
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 4rem auto;
+    }
+
+    .form-header h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-primary);
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 1rem;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      border: 1px solid var(--color-stone);
+      background-color: white;
+      color: var(--color-text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--color-champagne);
+      box-shadow: 0 0 0 3px rgba(212, 197, 176, 0.2);
+    }
+
+    .form-input.error,
+    .form-select.error {
+      border-color: #C45E5E;
+    }
+
+    .error-message {
+      color: #C45E5E;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .form-input.error + .error-message,
+    .form-select.error + .error-message {
+      display: block;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.5rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      margin-right: 0.75rem;
+      accent-color: var(--color-graphite);
+    }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Article Section */
+    .article-section {
+      background-color: #F7F5EB;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: 4rem auto;
+    }
+
+    .article-header h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .article-content {
+      font-family: var(--font-serif);
+      line-height: 2.2;
+      color: var(--color-text-primary);
+    }
+
+    .article-content h3 {
+      font-size: 1.75rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-content p {
+      font-family: var(--font-sans);
+      line-height: 2;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-cta {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    /* Final CTA Section */
+    .final-cta-section {
+      background-color: var(--color-graphite);
+      color: var(--color-ivory);
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .final-cta-text {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 3rem;
+      color: var(--color-ivory);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #1A1A1A;
+      color: var(--color-stone);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-size: 2rem;
+      color: var(--color-ivory);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: var(--color-stone);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--color-stone);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-champagne);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(232, 230, 225, 0.2);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-stone);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(45, 45, 45, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: var(--color-ivory);
+      max-width: 600px;
+      width: 90%;
+      padding: 3rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--color-text-primary);
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--color-champagne);
+    }
+
+    /* Success State */
+    .success-message {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--color-text-primary);
+    }
+
+    .success-message p {
+      color: var(--color-text-secondary);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .procedure-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .approach-grid {
+        gap: 3rem;
+      }
+
+      .surgeon-container {
+        gap: 4rem;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: var(--color-ivory);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .procedure-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .approach-grid,
+      .surgeon-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .ba-container {
+        height: 400px;
+      }
+
+      .form-container {
+        margin: 2rem auto;
+      }
+
+      .article-header h2 {
+        font-size: 2.5rem;
+      }
+
+      .final-cta-text {
+        font-size: 2.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .radio-group {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-padding {
+        padding: 5rem 0;
+      }
+
+      .hero-content {
+        transform: translate(-50%, -30%);
+      }
+
+      .procedure-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .surgeon-name {
+        font-size: 2.5rem;
+      }
+
+      .form-input,
+      .form-select {
+        padding: 0.875rem;
+      }
+
+      .modal-content {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-content">
+      <a href="#" class="logo">AURELIS</a>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#procedures" class="nav-link">Procedures</a></li>
+        <li><a href="#approach" class="nav-link">Approach</a></li>
+        <li><a href="#surgeon" class="nav-link">Surgeon</a></li>
+        <li><a href="#results" class="nav-link">Results</a></li>
+        <li><a href="#consultation" class="nav-link">Consultation</a></li>
+        <li><a href="#journal" class="nav-link">Journal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-video-container">
+        <video 
+          class="hero-video" 
+          id="heroVideo" 
+          src="/assets/hero-clinic.mp4" 
+          muted 
+          loop 
+          playsinline>
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+      
+      <div class="hero-content">
+        <h1 class="hero-title" id="heroTitle">Precision, planned around you.</h1>
+        <p class="hero-subtitle" id="heroSubtitle">A considered approach to cosmetic surgery, from first consultation to a carefully planned treatment journey.</p>
+        <div class="hero-cta-group" id="heroCTA">
+          <a href="#consultation" class="btn btn-primary">Book Online Consultation</a>
+          <a href="#procedures" class="btn btn-secondary">Explore Procedures</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Procedures Section -->
+    <section class="section-padding procedures-section" id="procedures">
+      <div class="container">
+        <h2 class="text-center">Our Procedures</h2>
+        <p class="text-center" style="max-width: 600px; margin: 1rem auto;">Thoughtfully planned treatments designed to enhance your natural beauty with precision and care.</p>
+        
+        <div class="procedure-grid">
+          <!-- Rhinoplasty -->
+          <article class="procedure-card" data-procedure="rhinoplasty">
+            <h3 class="procedure-title">Rhinoplasty</h3>
+            <p class="procedure-description">A refined approach to nose reshaping, balancing proportion and harmony with your facial features. Our surgical planning ensures natural results that enhance rather than alter.</p>
+            <button class="btn btn-secondary" data-procedure-btn="rhinoplasty">Learn More</button>
+          </article>
+
+          <!-- Facelift & Neck Lift -->
+          <article class="procedure-card" data-procedure="facelift">
+            <h3 class="procedure-title">Facelift & Neck Lift</h3>
+            <p class="procedure-description">Restore youthful contours with precision lifting techniques that rejuvenate the face and neck while preserving natural expression and movement.</p>
+            <button class="btn btn-secondary" data-procedure-btn="facelift">Learn More</button>
+          </article>
+
+          <!-- Blepharoplasty -->
+          <article class="procedure-card" data-procedure="blepharoplasty">
+            <h3 class="procedure-title">Blepharoplasty</h3>
+            <p class="procedure-description">Elegant eye rejuvenation through careful removal of excess skin and fat, revealing brighter, more alert eyes with minimal recovery time.</p>
+            <button class="btn btn-secondary" data-procedure-btn="blepharoplasty">Learn More</button>
+          </article>
+
+          <!-- Breast Augmentation -->
+          <article class="procedure-card" data-procedure="breast-augmentation">
+            <h3 class="procedure-title">Breast Augmentation</h3>
+            <p class="procedure-description">Personalized breast enhancement using carefully selected implants that complement your body proportions and aesthetic goals.</p>
+            <button class="btn btn-secondary" data-procedure-btn="breast-augmentation">Learn More</button>
+          </article>
+
+          <!-- Body Contouring -->
+          <article class="procedure-card" data-procedure="body-contouring">
+            <h3 class="procedure-title">Body Contouring</h3>
+            <p class="procedure-description">Sculpt your silhouette with precision techniques that enhance natural curves and create balanced, harmonious body proportions.</p>
+            <button class="btn btn-secondary" data-procedure-btn="body-contouring">Learn More</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Approach Section -->
+    <section class="section-padding approach-section" id="approach">
+      <div class="container">
+        <h2 class="text-center">Our Approach</h2>
+        
+        <div class="approach-grid">
+          <div class="approach-content">
+            <h3>Individual Consultation</h3>
+            <p>Your journey begins with a personalized consultation where we listen, understand, and collaborate on your aesthetic goals.</p>
+            
+            <h3 style="margin-top: 2rem;">Proportion and Anatomy</h3>
+            <p>We analyze facial harmony and anatomical considerations to ensure treatments enhance rather than mask your natural beauty.</p>
+            
+            <h3 style="margin-top: 2rem;">Careful Planning</h3>
+            <p>Every procedure is meticulously planned with detailed mapping, ensuring precision and optimal outcomes tailored specifically for you.</p>
+          </div>
+          
+          <div class="approach-content">
+            <h3>Clear Communication</h3>
+            <p>We maintain transparent dialogue throughout your journey, ensuring you understand each step of the process and feel confident in our recommendations.</p>
+            
+            <h3 style="margin-top: 2rem;">Realistic Expectations</h3>
+            <p>Honest discussions about what is achievable help set meaningful goals that align with your personal vision while respecting medical limitations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surgeon Section -->
+    <section class="section-padding surgeon-section" id="surgeon">
+      <div class="container">
+        <h2 class="text-center">Meet the Cosmetic Surgeon</h2>
+        
+        <div class="surgeon-container">
+          <div class="surgeon-image-placeholder">
+            <!-- Placeholder for surgeon image -->
+            <span>Surgeon Portrait Placeholder</span>
+          </div>
+          
+          <div class="surgeon-info">
+            <h3 class="surgeon-name">Dr. Elena Vale</h3>
+            <p class="surgeon-title">Cosmetic Surgeon</p>
+            
+            <span class="surgeon-demo-note">Demo Identity - For Interface Purposes Only</span>
+            
+            <p class="surgeon-bio">
+              Dr. Elena Vale brings a thoughtful, measured approach to cosmetic surgery, focusing on enhancement that respects and celebrates individual features. With years of experience in surgical planning and execution, she prioritizes natural outcomes that harmonize with your unique anatomy.
+            </p>
+            
+            <p class="surgeon-bio">
+              Her practice philosophy centers on the belief that true beauty emerges from understanding what works for you—not what others expect. Every consultation is an opportunity to explore options that align with your personal vision and lifestyle aspirations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before & After Section -->
+    <section class="section-padding before-after-section" id="results">
+      <div class="container text-center">
+        <h2 class="text-center">Results</h2>
+        
+        <div class="ba-container" id="beforeAfterContainer">
+          <div class="ba-labels">
+            <span class="ba-label">Before</span>
+            <span class="ba-label">After</span>
+          </div>
+          
+          <div class="ba-image" id="baImage">
+            <!-- Placeholder for before/after image -->
+            <span>Interactive Before & After Slider</span>
+          </div>
+          
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            value="50" 
+            class="ba-slider" 
+            id="baSlider"
+            aria-label="Slide to compare before and after results"
+          >
+          
+          <div class="ba-handle">
+            &#9664;&#9654;
+          </div>
+        </div>
+        
+        <p class="ba-disclaimer">Demo imagery shown for interface purposes only. Individual results vary.</p>
+      </div>
+    </section>
+
+    <!-- Consultation Form Section -->
+    <section class="section-padding consultation-section" id="consultation">
+      <div class="container">
+        <h2 class="text-center form-header">Book Online Consultation</h2>
+        
+        <form class="form-container" id="consultationForm">
+          <div class="form-group">
+            <label for="fullName" class="form-label">Full Name *</label>
+            <input 
+              type="text" 
+              id="fullName" 
+              name="fullName" 
+              class="form-input" 
+              placeholder="Enter your full name"
+              required
+            >
+            <span class="error-message">Please enter your full name</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-input" 
+              placeholder="your.email@example.com"
+              required
+            >
+            <span class="error-message">Please enter a valid email address</span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number *</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              class="form-input" 
+              placeholder="(555) 123-4567"
+              required
+            >
+            <span class="error-message">Please enter a valid phone number</span>
+          </div>
+
+          <div class="form-group">
+            <label for="procedure" class="form-label">Procedure of Interest *</label>
+            <select id="procedure" name="procedure" class="form-select" required>
+              <option value="">Select a procedure...</option>
+              <option value="rhinoplasty">Rhinoplasty</option>
+              <option value="facelift">Facelift & Neck Lift</option>
+              <option value="blepharoplasty">Blepharoplasty</option>
+              <option value="breast-augmentation">Breast Augmentation</option>
+              <option value="body-contouring">Body Contouring</option>
+            </select>
+            <span class="error-message">Please select a procedure</span>
+          </div>
+
+          <div class="form-group">
+            <label for="consultationType" class="form-label">Consultation Type *</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="consultationType" value="video" required>
+                Video Consultation
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="consultationType" value="in-person">
+                In-Person Consultation
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="preferredDate" class="form-label">Preferred Date *</label>
+            <input 
+              type="date" 
+              id="preferredDate" 
+              name="preferredDate" 
+              class="form-input" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="preferredTime" class="form-label">Preferred Time *</label>
+            <select id="preferredTime" name="preferredTime" class="form-select" required>
+              <option value="">Select a time...</option>
+              <option value="morning">Morning (9am - 12pm)</option>
+              <option value="afternoon">Afternoon (12pm - 5pm)</option>
+              <option value="evening">Evening (5pm - 8pm)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="note" class="form-label">Short Note or Concern</label>
+            <textarea 
+              id="note" 
+              name="note" 
+              class="form-input" 
+              rows="4" 
+              placeholder="Tell us about your goals or concerns..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <input type="checkbox" required>
+              I agree to receive a confirmation email and understand that this form is for scheduling purposes only.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Book Consultation</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Article Section -->
+    <section class="section-padding article-section" id="journal">
+      <div class="container">
+        <h2 class="text-center article-header">What to Expect During a Cosmetic Surgery Consultation</h2>
+        
+        <article class="article-container article-content">
+          <p>Your consultation is the foundation of your journey with AURELIS. This comprehensive meeting ensures we understand your unique goals, discuss realistic outcomes, and determine if you're a suitable candidate for the procedures you're considering.</p>
+          
+          <h3>Why the Consultation Matters</h3>
+          <p>The consultation is more than an initial assessment—it's the beginning of our collaborative partnership. During this meeting, we establish clear communication channels, discuss your aesthetic aspirations, and evaluate whether surgical enhancement aligns with your personal goals.</p>
+          
+          <h3>Discussing Your Goals</h3>
+          <p>We create a safe space for you to express what you're hoping to achieve. Whether it's subtle refinement or more significant changes, we listen carefully to understand the underlying motivations and desired outcomes that matter most to you.</p>
+          
+          <h3>Medical History and Suitability</h3>
+          <p>A thorough review of your medical history ensures your safety and helps us determine which procedures are appropriate for you. We discuss any health conditions, medications, or previous surgeries that may impact treatment planning.</p>
+          
+          <h3>Understanding Options and Limitations</h3>
+          <p>Honesty is central to our practice. We provide detailed information about available options, their benefits, limitations, recovery expectations, and realistic outcomes based on your anatomy and goals.</p>
+          
+          <h3>Questions to Ask</h3>
+          <p>We encourage you to prepare questions about the procedure itself, recovery timeline, potential risks, costs, and what to expect during healing. Your concerns are valid, and we're here to provide clear answers.</p>
+          
+          <h3>What Happens Next</h3>
+          <p>If you feel comfortable moving forward, we'll discuss next steps including treatment planning, scheduling your procedure date, and preparing for surgery. If you need more time to consider, we're happy to schedule a follow-up consultation.</p>
+          
+          <div class="article-cta">
+            <a href="#consultation" class="btn btn-primary">Book an Online Consultation</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section">
+      <div class="container">
+        <p class="final-cta-text">Begin with a conversation.</p>
+        <a href="#consultation" class="btn btn-primary">Book Online Consultation</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>AURELIS</h3>
+            <p style="color: var(--color-stone); line-height: 1.8;">Precision, planned around you.</p>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Procedures</h4>
+            <ul>
+              <li><a href="#">Rhinoplasty</a></li>
+              <li><a href="#">Facelift & Neck Lift</a></li>
+              <li><a href="#">Blepharoplasty</a></li>
+              <li><a href="#">Breast Augmentation</a></li>
+              <li><a href="#">Body Contouring</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Information</h4>
+            <ul>
+              <li><a href="#approach">Our Approach</a></li>
+              <li><a href="#surgeon">Meet the Surgeon</a></li>
+              <li><a href="#journal">Journal</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-contact">
+            <h4>Contact</h4>
+            <p style="color: var(--color-stone); line-height: 1.8;">
+              consultations@aurelis.com<br>
+              (555) 123-4567<br>
+              100 Aesthetic Avenue<br>
+              Beverly Hills, CA 90210
+            </p>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          &copy; 2024 AURELIS Cosmetic Surgery. All rights reserved.<br>
+          Demo website for interface purposes only.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      
+      <!-- Procedure Details Modal Content (will be populated dynamically) -->
+      <div id="procedureModalContent"></div>
+      
+      <!-- Success Message Modal Content -->
+      <div id="successModalContent" style="display: none;">
+        <div class="success-message">
+          <div class="success-icon">&#10003;</div>
+          <h3 class="success-title">Request Received</h3>
+          <p>Your consultation request has been received. Our team will contact you to confirm your appointment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Application -->
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

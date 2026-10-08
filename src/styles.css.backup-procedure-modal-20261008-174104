@@ -1,0 +1,3463 @@
+﻿/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #FDFBF7;
+  color: #2D2D2D;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #2D2D2D;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: #6B6B6B;
+}
+
+/* Focus States for Accessibility */
+:focus-visible {
+  outline: 2px solid #D4C5B0;
+  outline-offset: 3px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2D2D2D;
+  color: white;
+  padding: 1rem;
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-padding {
+  padding: 8rem 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: #2D2D2D;
+  color: #FDFBF7;
+}
+
+.btn-primary:hover {
+  background-color: #D4C5B0;
+  color: #2D2D2D;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #2D2D2D;
+  border: 1px solid #2D2D2D;
+}
+
+.btn-secondary:hover {
+  background-color: #2D2D2D;
+  color: #FDFBF7;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(253, 251, 247, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2D2D2D;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: #2D2D2D;
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #D4C5B0;
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger {
+  width: 28px;
+  height: 2px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #2D2D2D;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
+
+.mobile-menu-active .hamburger {
+  transform: rotate(45deg);
+}
+
+.mobile-menu-active .hamburger::before {
+  top: 0;
+  opacity: 0;
+}
+
+.mobile-menu-active .hamburger::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 350vh;
+  background: #17130f;
+}
+
+.hero-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #17130f;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+  background: #17130f;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20, 16, 13, 0.52) 0%,
+      rgba(20, 16, 13, 0.18) 45%,
+      rgba(20, 16, 13, 0.08) 70%,
+      rgba(20, 16, 13, 0.24) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(17, 14, 12, 0.25) 0%,
+      rgba(17, 14, 12, 0.05) 55%,
+      rgba(17, 14, 12, 0.42) 100%
+    );
+}
+
+.hero-content {
+  position: absolute;
+  z-index: 5;
+  left: clamp(1.5rem, 7vw, 8rem);
+  bottom: clamp(3.5rem, 10vh, 8rem);
+  width: min(720px, calc(100vw - 3rem));
+  color: #FDFBF7;
+  text-align: left;
+  transform: none;
+  transition:
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+
+.hero-eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253, 251, 247, 0.76);
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 13ch;
+  font-size: clamp(3rem, 6vw, 6.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  opacity: 1;
+  transform: none;
+  text-wrap: balance;
+}
+
+.hero-subtitle {
+  margin: 1.6rem 0 0;
+  max-width: 600px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+  line-height: 1.65;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(253, 251, 247, 0.86);
+  opacity: 1;
+  transform: none;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  opacity: 1;
+  transform: none;
+}
+
+.hero-final-cta {
+  max-width: 680px;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  z-index: 6;
+  right: clamp(1.5rem, 4vw, 4rem);
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(253, 251, 247, 0.65);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+}
+
+.hero-scroll-line {
+  display: block;
+  width: 1px;
+  height: 42px;
+  background: rgba(253, 251, 247, 0.52);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 300vh;
+  }
+
+  .hero-content {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 4rem;
+    width: auto;
+  }
+
+  .hero-title {
+    font-size: clamp(2.75rem, 13vw, 4.6rem);
+  }
+
+  .hero-subtitle {
+    max-width: 92%;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
+  }
+}
+
+/* Procedures Section */
+.procedures-section {
+  background-color: #FDFBF7;
+}
+
+.procedure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+.procedure-card {
+  background-color: #E8E6E1;
+  padding: 3rem 2.5rem;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.procedure-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.procedure-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #2D2D2D;
+}
+
+.procedure-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: #6B6B6B;
+}
+
+/* Our Approach Section */
+.approach-section {
+  background-color: #F7F5EB;
+}
+
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  align-items: center;
+}
+
+.approach-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #2D2D2D;
+}
+
+.approach-content p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 2;
+  color: #6B6B6B;
+  margin-bottom: 0.5rem;
+}
+
+/* Surgeon Section */
+.surgeon-section {
+  background-color: #FDFBF7;
+}
+
+.surgeon-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.surgeon-image-placeholder {
+  width: 100%;
+  height: 500px;
+  background-color: #E8E6E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6B6B6B;
+}
+
+.surgeon-info h2 {
+  margin-bottom: 1.5rem;
+}
+
+.surgeon-name {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.surgeon-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D4C5B0;
+  margin-bottom: 2rem;
+}
+
+.surgeon-demo-note {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  margin-bottom: 2rem;
+}
+
+.surgeon-bio {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 2;
+  max-width: 500px;
+}
+
+/* Before & After Section */
+.before-after-section {
+  background-color: #F7F5EB;
+}
+
+.ba-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 4rem auto;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.ba-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #E8E6E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6B6B6B;
+}
+
+.ba-slider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  cursor: ew-resize;
+  z-index: 10;
+}
+
+.ba-handle {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #2D2D2D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.ba-labels {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 10;
+}
+
+.ba-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0.8;
+}
+
+.ba-disclaimer {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+}
+
+/* Consultation Form Section */
+.consultation-section {
+  background-color: #FDFBF7;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 4rem auto;
+}
+
+.form-header h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  color: #2D2D2D;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  border: 1px solid #E8E6E1;
+  background-color: white;
+  color: #2D2D2D;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #D4C5B0;
+  box-shadow: 0 0 0 3px rgba(212, 197, 176, 0.2);
+}
+
+.form-input.error,
+.form-select.error {
+  border-color: #C45E5E;
+}
+
+.error-message {
+  color: #C45E5E;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.form-input.error + .error-message,
+.form-select.error + .error-message {
+  display: block;
+}
+
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 0.75rem;
+  accent-color: #2D2D2D;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: #6B6B6B;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+/* Article Section */
+.article-section {
+  background-color: #F7F5EB;
+}
+
+.article-container {
+  max-width: 800px;
+  margin: 4rem auto;
+}
+
+.article-header h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.article-content {
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 2.2;
+  color: #2D2D2D;
+}
+
+.article-content h3 {
+  font-size: 1.75rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-content p {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 2;
+  color: #6B6B6B;
+  margin-bottom: 1.5rem;
+}
+
+.article-cta {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* Final CTA Section */
+.final-cta-section {
+  background-color: #2D2D2D;
+  color: #FDFBF7;
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.final-cta-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 3rem;
+  color: #FDFBF7;
+}
+
+/* Footer */
+.footer {
+  background-color: #1A1A1A;
+  color: #E8E6E1;
+  padding: 4rem 0 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand h3 {
+  font-size: 2rem;
+  color: #FDFBF7;
+  margin-bottom: 1rem;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: #E8E6E1;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #E8E6E1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #D4C5B0;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(232, 230, 225, 0.2);
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #E8E6E1;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(45, 45, 45, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background-color: #FDFBF7;
+  max-width: 600px;
+  width: 90%;
+  padding: 3rem;
+  position: relative;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #2D2D2D;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #D4C5B0;
+}
+
+/* Success State */
+.success-message {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2D2D2D;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .procedure-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  .approach-grid {
+    gap: 3rem;
+  }
+
+  .surgeon-container {
+    gap: 4rem;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background-color: #FDFBF7;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: right 0.4s ease;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .procedure-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .approach-grid,
+  .surgeon-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .ba-container {
+    height: 400px;
+  }
+
+  .form-container {
+    margin: 2rem auto;
+  }
+
+  .article-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .final-cta-text {
+    font-size: 2.5rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .section-padding {
+    padding: 5rem 0;
+  }
+
+  .hero-content {
+    transform: translate(-50%, -30%);
+  }
+
+  .procedure-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .surgeon-name {
+    font-size: 2.5rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 0.875rem;
+  }
+
+  .modal-content {
+    padding: 2rem;
+  }
+}
+
+
+.hero-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  background: #17130f;
+  color: rgba(253, 251, 247, 0.72);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================
+   AURELIS — FINAL NAVIGATION
+   Hidden during cinematic hero.
+   Revealed only after Procedures begins.
+   ========================================================== */
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  z-index: 1000 !important;
+
+  height: 74px !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: rgba(253, 251, 247, 0.96) !important;
+
+  border-bottom:
+    1px solid rgba(45, 45, 45, 0.08) !important;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease !important;
+
+  will-change: transform, opacity;
+}
+
+.navbar-hidden {
+  transform: translateY(-110%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.navbar-visible {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.navbar-content {
+  width: 90% !important;
+  max-width: 1400px !important;
+  height: 100% !important;
+
+  margin: 0 auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Brand */
+
+.navbar-brand {
+  appearance: none !important;
+
+  border: 0 !important;
+  outline: 0;
+
+  background: transparent !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  color: #2d2d2d !important;
+
+  font-family:
+    'Cormorant Garamond',
+    serif !important;
+
+  font-size: 1.7rem !important;
+  font-weight: 500 !important;
+
+  letter-spacing: 0.08em !important;
+
+  line-height: 1 !important;
+
+  text-decoration: none !important;
+
+  cursor: pointer;
+}
+
+/* Navigation list */
+
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: clamp(1.5rem, 2.4vw, 2.8rem);
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  list-style: none !important;
+}
+
+.navbar .nav-links li {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  list-style: none !important;
+}
+
+/* Navigation buttons — no browser-blue links */
+
+.navbar-link {
+  appearance: none !important;
+
+  border: 0 !important;
+  outline: 0;
+
+  background: transparent !important;
+
+  margin: 0 !important;
+  padding: 0.3rem 0 !important;
+
+  color: #2d2d2d !important;
+
+  font-family:
+    'Montserrat',
+    sans-serif !important;
+
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+
+  letter-spacing: 0.095em !important;
+  text-transform: uppercase !important;
+
+  line-height: 1 !important;
+
+  text-decoration: none !important;
+
+  cursor: pointer;
+
+  opacity: 0.68;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.navbar-link:hover {
+  opacity: 1;
+}
+
+.navbar-link:focus-visible {
+  opacity: 1;
+  outline: 1px solid rgba(45, 45, 45, 0.5);
+  outline-offset: 5px;
+}
+
+/* Kill any surviving legacy anchor styling */
+
+.navbar a,
+.navbar a:link,
+.navbar a:visited,
+.navbar a:hover,
+.navbar a:active {
+  color: #2d2d2d !important;
+  text-decoration: none !important;
+}
+
+/* Hero must remain untouched by navbar */
+
+.hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Offset section jumps for fixed navbar */
+
+#procedures,
+#approach,
+#surgeon,
+#results,
+#consultation,
+#journal {
+  scroll-margin-top: 74px;
+}
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: 66px !important;
+  }
+
+  .navbar-content {
+    width: 92% !important;
+  }
+
+  #procedures,
+  #approach,
+  #surgeon,
+  #results,
+  #consultation,
+  #journal {
+    scroll-margin-top: 66px;
+  }
+}
+
+/* ==========================================================
+   AURELIS HERO WORDMARK
+   Visible only inside cinematic hero
+   ========================================================== */
+
+.hero-brand {
+  position: absolute;
+
+  top: 16%;
+  right: 3%;
+  left: auto;
+
+  transform: none;
+
+  z-index: 10;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: clamp(3.4rem, 5.5vw, 6rem);
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
+  line-height: 0.95;
+
+  color: rgba(253, 251, 247, 0.96);
+
+  pointer-events: none;
+
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.16);
+
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hero-brand {
+    top: 13%;
+    right: 3%;
+
+    font-size: clamp(2.5rem, 9vw, 3.8rem);
+    letter-spacing: 0.09em;
+  }
+}
+
+
+
+
+
+/* ==========================================================
+   AURELIS HERO BRAND LOCKUP
+   ========================================================== */
+
+.hero-brand-lockup {
+  position: absolute;
+
+  top: 16%;
+  right: 3%;
+
+  z-index: 10;
+
+  width: min(34vw, 560px);
+
+  pointer-events: none;
+}
+
+.hero-brand {
+  position: static;
+
+  transform: none;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: clamp(3.4rem, 5.5vw, 6rem);
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
+  line-height: 0.95;
+
+  color: rgba(253, 251, 247, 0.96);
+
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.16);
+
+  white-space: nowrap;
+}
+
+.hero-brand-copy {
+  margin-top: 1.35rem;
+  margin-bottom: 0;
+
+  max-width: 440px;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  letter-spacing: 0.01em;
+
+  color: #FDFBF7;
+}
+
+@media (max-width: 768px) {
+  .hero-brand-lockup {
+    top: 13%;
+    right: 5%;
+    left: 5%;
+
+    width: auto;
+  }
+
+  .hero-brand {
+    font-size: clamp(2.5rem, 9vw, 3.8rem);
+    letter-spacing: 0.09em;
+  }
+
+  .hero-brand-copy {
+    max-width: 360px;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+/* ==========================================================
+   AURELIS HERO — EDITORIAL RIGHT-SIDE LOCKUP
+   ========================================================== */
+
+.hero-brand-lockup {
+  position: absolute;
+
+  top: 17%;
+  right: 3%;
+
+  width: min(34vw, 560px);
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  text-align: right;
+}
+
+.hero-brand {
+  position: static;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: clamp(3.4rem, 5.5vw, 6rem);
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+  line-height: 0.95;
+
+  color: rgba(253, 251, 247, 0.97);
+
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.18);
+
+  white-space: nowrap;
+}
+
+.hero-brand-copy {
+  margin-top: 2.2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 0.28rem;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: clamp(0.9rem, 1vw, 1.08rem);
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  letter-spacing: 0.015em;
+
+  color: rgba(253, 251, 247, 0.88);
+
+  text-shadow:
+    0 1px 10px rgba(0, 0, 0, 0.22);
+}
+
+.brand-line {
+  display: block;
+}
+
+.brand-line-1 {
+  margin-right: 0;
+}
+
+.brand-line-2 {
+  margin-right: 2.2rem;
+}
+
+.brand-line-3 {
+  margin-right: 4.8rem;
+}
+
+/* Soft contrast support behind the right copy,
+   without creating a visible box. */
+
+.hero-brand-lockup::before {
+  content: '';
+
+  position: absolute;
+
+  inset:
+    -2.2rem
+    -1.8rem
+    -2.6rem
+    -4rem;
+
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      ellipse at 75% 45%,
+      rgba(28, 23, 19, 0.18) 0%,
+      rgba(28, 23, 19, 0.08) 42%,
+      rgba(28, 23, 19, 0) 74%
+    );
+
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hero-brand-lockup {
+    top: 12%;
+    right: 5%;
+    left: 5%;
+
+    width: auto;
+  }
+
+  .hero-brand {
+    font-size: clamp(2.5rem, 9vw, 3.8rem);
+  }
+
+  .hero-brand-copy {
+    margin-top: 1.25rem;
+
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .brand-line-2 {
+    margin-right: 1rem;
+  }
+
+  .brand-line-3 {
+    margin-right: 2rem;
+  }
+}
+
+/* ==========================================================
+   AURELIS HERO LOCKUP — CLEAN RIGHT ALIGNMENT
+   ========================================================== */
+
+.hero-brand-lockup {
+  position: absolute;
+
+  top: 17%;
+  right: 3%;
+
+  width: min(34vw, 560px);
+
+  z-index: 10;
+
+  text-align: right;
+
+  pointer-events: none;
+}
+
+/* Remove previous transparent / gradient backing entirely */
+.hero-brand-lockup::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+.hero-brand {
+  position: static;
+
+  width: 100%;
+
+  text-align: right;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: clamp(3.4rem, 5.5vw, 6rem);
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+  line-height: 0.95;
+
+  color: rgba(253, 251, 247, 0.97);
+
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.14);
+
+  white-space: nowrap;
+}
+
+.hero-brand-copy {
+  margin-top: 2rem;
+  margin-left: auto;
+
+  width: min(100%, 470px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 0.3rem;
+
+  text-align: right;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: clamp(0.9rem, 1vw, 1.08rem);
+  font-weight: 400;
+
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+
+  color: rgba(253, 251, 247, 0.92);
+
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-brand-copy .brand-line {
+  display: block;
+
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+
+  text-align: right;
+}
+
+/* All lines terminate at the exact same right edge */
+.brand-line-1,
+.brand-line-2,
+.brand-line-3 {
+  margin-right: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .hero-brand-lockup {
+    top: 12%;
+    right: 5%;
+    left: auto;
+
+    width: 72vw;
+  }
+
+  .hero-brand {
+    font-size: clamp(2.5rem, 9vw, 3.8rem);
+  }
+
+  .hero-brand-copy {
+    width: 100%;
+
+    margin-top: 1.3rem;
+
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+}
+
+/* ==========================================================
+   AURELIS HERO — STRONGER RIGHT-SIDE BALANCE
+   ========================================================== */
+
+.hero-brand-lockup {
+  position: absolute;
+
+  top: 16%;
+  right: 3.5%;
+
+  width: min(38vw, 650px);
+
+  z-index: 10;
+
+  text-align: right;
+  pointer-events: none;
+}
+
+.hero-brand-lockup::before {
+  display: none !important;
+  content: none !important;
+}
+
+.hero-brand {
+  position: static;
+
+  width: 100%;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: clamp(4.4rem, 6.4vw, 7rem);
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  line-height: 0.9;
+
+  text-align: right;
+
+  color: #FDFBF7;
+
+  text-shadow: none;
+
+  white-space: nowrap;
+}
+
+.hero-brand-copy {
+  margin-top: 2.25rem;
+  margin-left: auto;
+
+  width: min(100%, 590px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 0.4rem;
+
+  text-align: right;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  letter-spacing: 0;
+
+  color: #2d2d2d;
+
+  text-shadow: none;
+}
+
+.hero-brand-copy .brand-line {
+  display: block;
+
+  margin: 0 !important;
+
+  max-width: 590px;
+
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .hero-brand-lockup {
+    top: 12%;
+    right: 5%;
+
+    width: 82vw;
+  }
+
+  .hero-brand {
+    font-size: clamp(3rem, 11vw, 4.5rem);
+  }
+
+  .hero-brand-copy {
+    margin-top: 1.4rem;
+
+    width: 100%;
+
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+
+/* ==========================================================
+   AURELIS MOTION
+   Adapted from heynuff public site's QuietStudio motion system
+   ========================================================== */
+
+.aurelis-title-word {
+  display: inline-block;
+  margin-right: 0.22em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  .aurelis-title-word {
+    animation:
+      aurelis-word-enter
+      280ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay:
+      calc(var(--word-index) * 18ms);
+  }
+
+  .aurelis-copy-enter {
+    animation:
+      aurelis-copy-enter
+      260ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+  }
+
+  .aurelis-copy-delay {
+    animation-delay: 75ms;
+  }
+
+  .aurelis-brand-enter {
+    animation:
+      aurelis-brand-enter
+      280ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay: 40ms;
+  }
+
+  .aurelis-brand-copy-delay {
+    animation-delay: 90ms;
+  }
+}
+
+@keyframes aurelis-word-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate3d(
+        calc((var(--word-index) - 4) * .35rem),
+        1.5rem,
+        0
+      )
+      rotate(
+        calc((var(--word-index) - 3) * .22deg)
+      );
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0);
+  }
+}
+
+@keyframes aurelis-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-1rem, .6rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aurelis-brand-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(1.5rem, .4rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurelis-title-word,
+  .aurelis-copy-enter,
+  .aurelis-brand-enter {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS SEAMLESS HERO MOTION
+   Based directly on heynuff QuietStudio enter/exit language.
+   Canvas remains stationary; left and right typography move.
+   ========================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --------------------------------------------------------
+     DEFAULT / RESTING STATE
+     -------------------------------------------------------- */
+
+  .hero .hero-content,
+  .hero .hero-brand-lockup,
+  .hero .hero-subtitle,
+  .hero .hero-cta-group,
+  .hero .aurelis-title-word {
+    animation: none;
+  }
+
+  /* --------------------------------------------------------
+     ENTER — LEFT
+     heynuff quiet-word-enter + quiet-copy-enter
+     -------------------------------------------------------- */
+
+  .hero[data-motion-phase='enter']
+  .aurelis-title-word {
+    animation:
+      aurelis-seamless-word-enter
+      280ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay:
+      calc(var(--word-index) * 18ms);
+  }
+
+  .hero[data-motion-phase='enter']
+  .hero-subtitle {
+    animation:
+      aurelis-seamless-copy-enter
+      260ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay: 45ms;
+  }
+
+  .hero[data-motion-phase='enter']
+  .hero-cta-group {
+    animation:
+      aurelis-seamless-copy-enter
+      260ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay: 75ms;
+  }
+
+  /* --------------------------------------------------------
+     ENTER — RIGHT
+     heynuff quiet-card-enter
+     -------------------------------------------------------- */
+
+  .hero[data-motion-phase='enter']
+  .hero-brand-lockup {
+    animation:
+      aurelis-seamless-right-enter
+      280ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+  }
+
+  /* --------------------------------------------------------
+     EXIT — LEFT
+     heynuff quiet-copy-exit
+     -------------------------------------------------------- */
+
+  .hero[data-motion-phase='exit']
+  .hero-content {
+    animation:
+      aurelis-seamless-left-exit
+      220ms
+      cubic-bezier(.4, 0, 1, 1)
+      both !important;
+  }
+
+  /* --------------------------------------------------------
+     EXIT — RIGHT
+     heynuff quiet-card-exit
+     -------------------------------------------------------- */
+
+  .hero[data-motion-phase='exit']
+  .hero-brand-lockup {
+    animation:
+      aurelis-seamless-right-exit
+      220ms
+      cubic-bezier(.4, 0, 1, 1)
+      both !important;
+  }
+}
+
+
+/* ==========================================================
+   EXACT MOTION LANGUAGE
+   ========================================================== */
+
+@keyframes aurelis-seamless-word-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate3d(
+        calc((var(--word-index) - 4) * .35rem),
+        1.5rem,
+        0
+      )
+      rotate(
+        calc((var(--word-index) - 3) * .22deg)
+      );
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0);
+  }
+}
+
+@keyframes aurelis-seamless-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-1rem, .6rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aurelis-seamless-right-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate3d(2.2rem, 1rem, 0)
+      scale(.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+}
+
+@keyframes aurelis-seamless-left-exit {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-1.6rem, -.4rem, 0);
+  }
+}
+
+@keyframes aurelis-seamless-right-exit {
+  from {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  to {
+    opacity: 0;
+
+    transform:
+      translate3d(2.2rem, .5rem, 0)
+      scale(.985);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-content,
+  .hero .hero-brand-lockup,
+  .hero .hero-subtitle,
+  .hero .hero-cta-group,
+  .hero .aurelis-title-word {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — REFINED CARD SCALE
+   ========================================================== */
+
+.procedure-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 320px));
+
+  justify-content: center;
+
+  column-gap: 2.5rem;
+  row-gap: 2.75rem;
+
+  margin-top: 3rem;
+}
+
+.procedure-card {
+  width: 100%;
+
+  padding: 2.25rem 2rem;
+
+  background-color: #E8E6E1;
+}
+
+.procedure-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.procedure-card p {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1100px) {
+  .procedure-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 320px));
+
+    column-gap: 2rem;
+    row-gap: 2.25rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .procedure-grid {
+    grid-template-columns:
+      minmax(0, 340px);
+
+    gap: 1.5rem;
+
+    margin-top: 2.5rem;
+  }
+
+  .procedure-card {
+    padding: 2rem 1.6rem;
+  }
+}
+
+/* ==========================================================
+   AURELIS — EDITORIAL PROCEDURES GALLERY
+   ========================================================== */
+
+.procedures-editorial {
+  background: var(--aurelis-ivory, #FDFBF7);
+  overflow: hidden;
+}
+
+.procedures-heading {
+  width: min(100%, 700px);
+  margin: 0 auto 3.5rem;
+
+  text-align: center;
+}
+
+.procedures-kicker {
+  display: block;
+
+  margin-bottom: 0.8rem;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+
+  letter-spacing: 0.2em;
+
+  color: var(--aurelis-graphite-soft, #6B6863);
+}
+
+.procedures-heading h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.1rem, 5vw, 5.5rem);
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  color: var(--aurelis-graphite, #2D2D2D);
+}
+
+.procedures-heading p {
+  max-width: 580px;
+
+  margin: 1.35rem auto 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  color: var(--aurelis-graphite-soft, #6B6863);
+}
+
+
+/* ----------------------------------------------------------
+   GALLERY
+   ---------------------------------------------------------- */
+
+.procedure-gallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 3rem 1.4rem;
+
+  max-width: 1120px;
+
+  margin: 0 auto;
+}
+
+.procedure-visual-card {
+  appearance: none;
+
+  display: block;
+
+  width: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.procedure-image-frame {
+  position: relative;
+
+  display: block;
+
+  aspect-ratio: 3 / 4;
+
+  overflow: hidden;
+
+  border-radius: 1.1rem;
+
+  background: var(--aurelis-graphite-soft, #6B6863);
+
+  box-shadow:
+    0 1px 0 rgba(45, 45, 45, 0.04),
+    0 18px 50px rgba(45, 45, 45, 0.08);
+
+  transform: translate3d(0, 0, 0);
+
+  transition:
+    transform 420ms cubic-bezier(.23, 1, .32, 1),
+    box-shadow 420ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.procedure-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1.001);
+
+  transition:
+    transform 650ms cubic-bezier(.23, 1, .32, 1),
+    filter 450ms ease;
+}
+
+.procedure-image-number {
+  position: absolute;
+
+  top: 1rem;
+  left: 1rem;
+
+  z-index: 2;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
+  color: var(--aurelis-ivory, #FDFBF7);
+}
+
+.procedure-image-action {
+  position: absolute;
+
+  right: 1rem;
+  bottom: 1rem;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+
+  padding: 0.65rem 0.8rem;
+
+  border-radius: 999px;
+
+  background: rgba(253, 251, 247, 0.92);
+
+  backdrop-filter: blur(10px);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--aurelis-graphite, #2D2D2D);
+
+  opacity: 0;
+
+  transform: translate3d(0, 0.6rem, 0);
+
+  transition:
+    opacity 280ms ease,
+    transform 320ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.procedure-caption {
+  display: block;
+
+  margin-top: 0.9rem;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 2vw, 2.25rem);
+  font-weight: 400;
+
+  line-height: 1;
+
+  color: var(--aurelis-graphite, #2D2D2D);
+}
+
+
+/* ----------------------------------------------------------
+   HOVER
+   ---------------------------------------------------------- */
+
+@media (hover: hover) {
+
+  .procedure-visual-card:hover
+  .procedure-image-frame {
+    transform: translate3d(0, -0.4rem, 0);
+
+    box-shadow:
+      0 2px 0 rgba(45, 45, 45, 0.03),
+      0 26px 65px rgba(45, 45, 45, 0.13);
+  }
+
+  .procedure-visual-card:hover
+  .procedure-image {
+    transform: scale(1.045);
+  }
+
+  .procedure-visual-card:hover
+  .procedure-image-action {
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   KEYBOARD
+   ---------------------------------------------------------- */
+
+.procedure-visual-card:focus-visible
+.procedure-image-frame {
+  outline:
+    2px solid
+    var(--aurelis-champagne, #D4C5B0);
+
+  outline-offset: 5px;
+}
+
+
+/* ==========================================================
+   PROCEDURE MODAL
+   ========================================================== */
+
+.procedure-modal-shell {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 4rem;
+
+  background:
+    rgba(45, 45, 45, 0.78);
+
+  backdrop-filter: blur(18px);
+
+  overflow-y: auto;
+}
+
+.procedure-modal-stage {
+  position: relative;
+
+  width: min(1080px, 100%);
+
+  min-height: min(760px, 86vh);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.procedure-modal-image-wrap {
+  width: min(620px, 58vw);
+
+  aspect-ratio: 3 / 4;
+
+  overflow: hidden;
+
+  border-radius: 1.4rem;
+
+  background:
+    var(--aurelis-graphite-soft, #6B6863);
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.32);
+
+  animation:
+    aurelis-procedure-image-enter
+    440ms
+    cubic-bezier(.23, 1, .32, 1)
+    both;
+}
+
+.procedure-modal-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.procedure-modal-copy {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(430px, 42vw);
+
+  margin-left: -3.2rem;
+
+  padding: 2.8rem 2.7rem;
+
+  background:
+    rgba(253, 251, 247, 0.96);
+
+  box-shadow:
+    0 22px 60px rgba(45, 45, 45, 0.16);
+
+  backdrop-filter: blur(12px);
+}
+
+.procedure-modal-label {
+  display: block;
+
+  margin-bottom: 1rem;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+
+  color:
+    var(--aurelis-graphite-soft, #6B6863);
+}
+
+.procedure-modal-copy h3 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 4vw, 4.8rem);
+  font-weight: 400;
+
+  line-height: 0.94;
+
+  color:
+    var(--aurelis-graphite, #2D2D2D);
+}
+
+.procedure-modal-copy > p {
+  margin: 1.4rem 0 1.5rem;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.92rem;
+
+  line-height: 1.75;
+
+  color:
+    var(--aurelis-graphite-soft, #6B6863);
+}
+
+.procedure-modal-copy ul {
+  margin: 0 0 2rem;
+  padding: 0;
+
+  list-style: none;
+}
+
+.procedure-modal-copy li {
+  padding: 0.65rem 0;
+
+  border-top:
+    1px solid
+    var(--aurelis-oyster, #DED9D1);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+
+  letter-spacing: 0.025em;
+
+  color:
+    var(--aurelis-graphite, #2D2D2D);
+}
+
+.procedure-modal-copy li:last-child {
+  border-bottom:
+    1px solid
+    var(--aurelis-oyster, #DED9D1);
+}
+
+.procedure-modal-cta {
+  appearance: none;
+
+  width: 100%;
+
+  padding: 1rem 1.2rem;
+
+  border:
+    1px solid
+    var(--aurelis-graphite, #2D2D2D);
+
+  background:
+    var(--aurelis-graphite, #2D2D2D);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color:
+    var(--aurelis-ivory, #FDFBF7);
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.procedure-modal-cta:hover {
+  background:
+    var(--aurelis-espresso, #40372F);
+}
+
+.procedure-modal-close {
+  position: fixed;
+
+  top: 1.7rem;
+  right: 2rem;
+
+  z-index: 5002;
+
+  width: 3rem;
+  height: 3rem;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(253, 251, 247, 0.4);
+
+  border-radius: 50%;
+
+  background:
+    rgba(45, 45, 45, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 300;
+
+  color:
+    var(--aurelis-ivory, #FDFBF7);
+
+  cursor: pointer;
+}
+
+
+/* ----------------------------------------------------------
+   MODAL IMAGE MOTION
+   ---------------------------------------------------------- */
+
+@keyframes aurelis-procedure-image-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate3d(0, 1.4rem, 0)
+      scale(.975);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 1000px) {
+
+  .procedure-gallery {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    max-width: 760px;
+  }
+
+  .procedure-modal-stage {
+    width: min(760px, 100%);
+
+    flex-direction: column;
+
+    padding: 2rem 0;
+  }
+
+  .procedure-modal-image-wrap {
+    width: min(560px, 78vw);
+  }
+
+  .procedure-modal-copy {
+    width: min(500px, 70vw);
+
+    margin:
+      -4rem
+      0
+      0
+      auto;
+  }
+}
+
+@media (max-width: 680px) {
+
+  .procedures-heading {
+    margin-bottom: 2.5rem;
+  }
+
+  .procedure-gallery {
+    grid-template-columns: 1fr;
+
+    gap: 2.5rem;
+
+    width: min(100%, 390px);
+  }
+
+  .procedure-modal-shell {
+    display: block;
+
+    padding:
+      4.8rem
+      1rem
+      2rem;
+  }
+
+  .procedure-modal-stage {
+    width: 100%;
+
+    min-height: auto;
+
+    padding: 0;
+  }
+
+  .procedure-modal-image-wrap {
+    width: 100%;
+  }
+
+  .procedure-modal-copy {
+    width: calc(100% - 1.5rem);
+
+    margin:
+      -2.2rem
+      0
+      0
+      auto;
+
+    padding:
+      2rem
+      1.5rem;
+  }
+
+  .procedure-modal-close {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .procedure-image,
+  .procedure-image-frame,
+  .procedure-image-action,
+  .procedure-modal-image-wrap {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — 5-CARD SINGLE ROW
+   ========================================================== */
+
+.procedure-gallery {
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr)) !important;
+
+  gap: 1rem !important;
+
+  max-width: 1480px !important;
+}
+
+.procedure-caption {
+  font-size: clamp(1.2rem, 1.45vw, 1.65rem) !important;
+}
+
+/* Keep tablet/mobile usable */
+
+@media (max-width: 1200px) {
+  .procedure-gallery {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+
+    max-width: 1000px !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .procedure-gallery {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .procedure-gallery {
+    grid-template-columns:
+      1fr !important;
+
+    width: min(100%, 390px) !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — LARGER IMAGE-ONLY CARDS
+   ========================================================== */
+
+.procedure-gallery {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 1.25rem !important;
+  max-width: 1560px !important;
+  width: min(94vw, 1560px) !important;
+  margin: 0 auto !important;
+}
+
+/* Make each card larger */
+.procedure-card {
+  width: 100% !important;
+}
+
+/* Bigger visual area */
+.procedure-card-image,
+.procedure-image,
+.procedure-card-media,
+.procedure-card img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4 / 5 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 18px !important;
+}
+
+/* If the card wrapper itself controls the image box */
+.procedure-card > a,
+.procedure-card > button,
+.procedure-card > div:first-child {
+  display: block !important;
+}
+
+/* Hide titles / names / captions under the cards */
+.procedure-caption,
+.procedure-card-title,
+.procedure-card-name,
+.procedure-title,
+.procedure-name,
+.procedure-card h3,
+.procedure-card h4,
+.procedure-card p {
+  display: none !important;
+}
+
+/* Give the cards a bit more prominence */
+.procedure-card:hover {
+  transform: translateY(-4px) !important;
+  transition: transform 0.25s ease !important;
+}
+
+/* Tablet */
+@media (max-width: 1400px) {
+  .procedure-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    max-width: 1100px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+  .procedure-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-width: 720px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .procedure-gallery {
+    grid-template-columns: 1fr !important;
+    width: min(92vw, 390px) !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — FINAL LARGE CENTERED ROW
+   ========================================================== */
+
+.procedure-gallery {
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr)) !important;
+
+  gap: 1.1rem !important;
+
+  width: min(96vw, 1640px) !important;
+  max-width: 1640px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  justify-content: center !important;
+  align-items: start !important;
+}
+
+.procedure-visual-card {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Main image frame */
+.procedure-image-frame {
+  width: 100% !important;
+
+  aspect-ratio: 3 / 4 !important;
+
+  overflow: hidden !important;
+
+  border-radius: 1rem !important;
+
+  background: transparent !important;
+
+  box-shadow:
+    0 18px 42px rgba(45, 45, 45, 0.08) !important;
+}
+
+/* Make image fill the entire card.
+   Removes the gray strip at the bottom. */
+.procedure-image-frame .procedure-image,
+.procedure-image-frame img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: cover !important;
+
+  border-radius: 0 !important;
+}
+
+/* Kill any caption spacing under the cards */
+.procedure-caption {
+  display: none !important;
+
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* No background/strip after image */
+.procedure-image-frame::after,
+.procedure-visual-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Keep restrained hover */
+@media (hover: hover) {
+  .procedure-visual-card:hover .procedure-image-frame {
+    transform: translate3d(0, -0.3rem, 0) !important;
+
+    box-shadow:
+      0 24px 55px rgba(45, 45, 45, 0.11) !important;
+  }
+
+  .procedure-visual-card:hover .procedure-image {
+    transform: scale(1.035) !important;
+  }
+}
+
+/* Only collapse below desktop */
+@media (max-width: 1250px) {
+  .procedure-gallery {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+
+    width: min(94vw, 1050px) !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .procedure-gallery {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    width: min(92vw, 720px) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .procedure-gallery {
+    grid-template-columns: 1fr !important;
+
+    width: min(90vw, 400px) !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — TRUE VIEWPORT CENTERING
+   ========================================================== */
+
+.procedure-gallery {
+  position: relative !important;
+
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  width: min(calc(100vw - 80px), 1500px) !important;
+  max-width: 1500px !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr)) !important;
+
+  gap: 1.1rem !important;
+}
+
+/* Keep responsive layouts centered too */
+
+@media (max-width: 1250px) {
+  .procedure-gallery {
+    width: min(calc(100vw - 60px), 1050px) !important;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .procedure-gallery {
+    width: min(calc(100vw - 40px), 720px) !important;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .procedure-gallery {
+    width: calc(100vw - 32px) !important;
+
+    grid-template-columns:
+      1fr !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — 20% LARGER
+   ========================================================== */
+
+.procedure-gallery {
+  width: min(calc(100vw - 48px), 1800px) !important;
+  max-width: 1800px !important;
+
+  gap: 1.2rem !important;
+}
+
+
+/* ==========================================================
+   AURELIS PROCEDURES — EDITORIAL HEADING
+   ========================================================== */
+
+.procedures-heading {
+  width: min(100%, 820px) !important;
+
+  margin:
+    0
+    auto
+    3.8rem !important;
+
+  text-align: center;
+}
+
+.procedures-kicker {
+  margin-bottom: 1rem !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+
+  letter-spacing: 0.22em !important;
+
+  color:
+    var(--aurelis-graphite-soft, #6B6863) !important;
+}
+
+.procedures-heading h2 {
+  margin: 0 !important;
+
+  font-family:
+    'Cormorant Garamond',
+    serif !important;
+
+  font-size:
+    clamp(3.7rem, 6vw, 6.5rem) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.94 !important;
+
+  letter-spacing: -0.02em !important;
+
+  color:
+    var(--aurelis-graphite, #2D2D2D) !important;
+}
+
+.procedure-heading-word {
+  display: inline-block;
+
+  margin-right: 0.18em;
+}
+
+.procedure-heading-word:last-child {
+  margin-right: 0;
+}
+
+.procedures-heading p {
+  max-width: 650px !important;
+
+  margin:
+    1.5rem
+    auto
+    0 !important;
+
+  font-family:
+    'Montserrat',
+    sans-serif !important;
+
+  font-size:
+    clamp(0.92rem, 1.05vw, 1.05rem) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 1.75 !important;
+
+  color:
+    var(--aurelis-graphite-soft, #6B6863) !important;
+}
+
+
+/* ==========================================================
+   AURELIS PROCEDURES — VIEWPORT MOTION
+   Same restrained motion language as hero
+   ========================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  .procedures-heading .procedures-kicker,
+  .procedures-heading .procedure-heading-word,
+  .procedures-heading p {
+    opacity: 0;
+  }
+
+  .procedures-heading-visible
+  .procedures-kicker {
+    animation:
+      aurelis-procedures-kicker-enter
+      260ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+  }
+
+  .procedures-heading-visible
+  .procedure-heading-word {
+    animation:
+      aurelis-procedures-word-enter
+      320ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay:
+      calc(
+        35ms +
+        (var(--heading-index) * 45ms)
+      );
+  }
+
+  .procedures-heading-visible p {
+    animation:
+      aurelis-procedures-copy-enter
+      300ms
+      cubic-bezier(.23, 1, .32, 1)
+      both;
+
+    animation-delay: 150ms;
+  }
+}
+
+@keyframes aurelis-procedures-kicker-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.6rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aurelis-procedures-word-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate3d(
+        calc((var(--heading-index) - 1) * 0.45rem),
+        1.4rem,
+        0
+      )
+      rotate(
+        calc((var(--heading-index) - 1) * 0.25deg)
+      );
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0);
+  }
+}
+
+@keyframes aurelis-procedures-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.8rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .procedures-heading .procedures-kicker,
+  .procedures-heading .procedure-heading-word,
+  .procedures-heading p {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   AURELIS PROCEDURES — REFINED SCALE + LIGHT GRAPHITE FIELD
+   ========================================================== */
+
+.procedures-editorial,
+.procedures-section {
+  background: #E1DEDA !important;
+}
+
+/* Smaller editorial statement */
+.procedures-heading h2 {
+  font-size: clamp(3rem, 4.4vw, 4.8rem) !important;
+  line-height: 0.96 !important;
+}
+
+/* Keep headline graphite */
+.procedures-heading h2,
+.procedure-heading-word {
+  color: #2D2D2D !important;
+}
+
+/* Supporting copy stays soft graphite */
+.procedures-kicker,
+.procedures-heading p {
+  color: #6B6863 !important;
+}
+
+/* Give the intro a little more breathing room before imagery */
+.procedures-heading {
+  margin-bottom: 3.4rem !important;
+}
+
+
+/* AURELIS PROCEDURES — DEEPER SOFT GRAPHITE */
+
+.procedures-editorial,
+.procedures-section {
+  background: #B8B4AF !important;
+}
+
+
+/* AURELIS PROCEDURES — DARK SOFT GRAPHITE */
+
+.procedures-editorial,
+.procedures-section {
+  background: #837F7A !important;
+}
+
+
+/* AURELIS PROCEDURES — CANONICAL SOFT GRAPHITE */
+
+.procedures-editorial,
+.procedures-section {
+  background: #6B6863 !important;
+}
+
+
+/* AURELIS PROCEDURES — OYSTER BACKGROUND */
+
+.procedures-editorial,
+.procedures-section {
+  background: #DED9D1 !important;
+}
+
+
+/* ==========================================================
+   AURELIS PROCEDURES — TIGHTER INTRO SPACING
+   ========================================================== */
+
+.procedures-heading {
+  margin-bottom: 2.6rem !important;
+}
+
+.procedures-kicker {
+  margin-bottom: 0.55rem !important;
+}
+
+.procedures-heading h2 {
+  line-height: 0.92 !important;
+}
+
+.procedures-heading p {
+  margin-top: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+
+/* === AURELIS MODAL REPAIR START === */
+
+/* Modal overlay */
+.modal-overlay.active {
+  background: rgba(34, 34, 34, 0.42) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  padding: 2.5rem !important;
+  overflow-y: auto !important;
+}
+
+/* Main modal shell */
+.modal-content {
+  position: relative !important;
+  width: min(1240px, calc(100vw - 64px)) !important;
+  margin: 0 auto !important;
+
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.74fr) !important;
+  align-items: center !important;
+  gap: clamp(2rem, 4vw, 4.5rem) !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.modal-content > * {
+  min-width: 0 !important;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute !important;
+  top: -0.8rem !important;
+  right: -0.8rem !important;
+  width: 2.75rem !important;
+  height: 2.75rem !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(253, 251, 247, 0.96) !important;
+  color: #2D2D2D !important;
+  font-size: 1.8rem !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  z-index: 20 !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* Image */
+.modal-content img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 4 / 5 !important;
+  object-fit: cover !important;
+  border-radius: 28px !important;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* Right info panel */
+.modal-content > :last-child {
+  width: min(100%, 470px) !important;
+  margin-left: auto !important;
+  padding: clamp(2rem, 2.5vw, 2.9rem) !important;
+
+  background: #F3EFE9 !important;
+  border-radius: 0 !important;
+
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10) !important;
+}
+
+/* Small eyebrow / kicker */
+.modal-content > :last-child > :first-child {
+  display: block !important;
+  margin: 0 0 0.85rem 0 !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #7A746C !important;
+}
+
+/* Main modal title */
+.modal-content > :last-child h1,
+.modal-content > :last-child h2,
+.modal-content > :last-child h3 {
+  margin: 0 0 1.2rem 0 !important;
+
+  color: #2D2D2D !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(3.1rem, 4vw, 4.8rem) !important;
+  font-weight: 400 !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.03em !important;
+
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+
+  max-width: 10ch !important;
+}
+
+/* Supporting copy */
+.modal-content > :last-child p {
+  color: #6B6863 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 1.02rem !important;
+  line-height: 1.65 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Dividers / detail rows */
+.modal-content > :last-child hr {
+  border: 0 !important;
+  border-top: 1px solid rgba(45, 45, 45, 0.10) !important;
+  margin: 1rem 0 !important;
+}
+
+.modal-content > :last-child li,
+.modal-content > :last-child .procedure-detail,
+.modal-content > :last-child .detail-row {
+  color: #5F5B55 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+/* CTA button inside modal */
+.modal-content > :last-child .btn,
+.modal-content > :last-child button:last-child,
+.modal-content > :last-child a.btn {
+  width: 100% !important;
+  margin-top: 1.4rem !important;
+}
+
+/* Tablet */
+@media (max-width: 1180px) {
+  .modal-content {
+    width: min(960px, calc(100vw - 48px)) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr) !important;
+    gap: 2rem !important;
+  }
+
+  .modal-content > :last-child h1,
+  .modal-content > :last-child h2,
+  .modal-content > :last-child h3 {
+    font-size: clamp(2.7rem, 4vw, 4rem) !important;
+    max-width: 11ch !important;
+  }
+}
+
+/* Mobile / stacked */
+@media (max-width: 900px) {
+  .modal-overlay.active {
+    padding: 1.25rem !important;
+  }
+
+  .modal-content {
+    width: min(760px, calc(100vw - 24px)) !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .modal-content img {
+    border-radius: 22px 22px 0 0 !important;
+    aspect-ratio: 4 / 4.5 !important;
+  }
+
+  .modal-content > :last-child {
+    width: 100% !important;
+    margin-left: 0 !important;
+    border-radius: 0 0 22px 22px !important;
+  }
+
+  .modal-content > :last-child h1,
+  .modal-content > :last-child h2,
+  .modal-content > :last-child h3 {
+    font-size: clamp(2.35rem, 8vw, 3.4rem) !important;
+    max-width: 100% !important;
+  }
+
+  .modal-close {
+    top: 0.8rem !important;
+    right: 0.8rem !important;
+  }
+}
+
+/* === AURELIS MODAL REPAIR END === */
+
+
