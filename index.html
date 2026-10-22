@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-page="home">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#565656" />
+  <title>Your options, clearly explained | Aurelis Clinic</title>
+  <meta name="description" content="Explore cosmetic surgery, skin treatments and stem cell information in this clinic website demo. Preview an in-clinic or video consultation request." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Aurelis Clinic | Your options, clearly explained" />
+  <meta property="og:description" content="A clinic website demo built around clear information and a simple consultation request, in clinic or by video call." />
+  <meta property="og:image" content="/assets/home-contour-og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/living-contour-thoughts-final.webp" as="image" fetchpriority="high" />
+  <script id="entrance-boot">
+    (() => {
+      try {
+        const seen = sessionStorage.getItem('aurelis-welcome');
+        sessionStorage.setItem('aurelis-welcome', 'seen');
+        const type = performance.getEntriesByType('navigation')[0]?.type || 'navigate';
+        const innerHash = ['#menu', '#visits', '#doctors', '#clinics', '#questions'].includes(location.hash);
+        const home = (location.pathname.replace(/\/+$/, '') || '/') === '/' && !innerHash;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches || type === 'back_forward' || (type === 'reload' && !home) || (seen && !(home && type === 'reload'))) return;
+        document.documentElement.dataset.entrance = 'pending';
+        // A failed module must never leave the real page hidden.
+        setTimeout(() => document.documentElement.removeAttribute('data-entrance'), 18000);
+      } catch { /* Unavailable session storage: show the site directly. */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 256 256"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></symbol>
+    <symbol id="i-envelope" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol>
+    <symbol id="i-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app-window">
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Aurelis Clinic, Home">Aurelis<span>Clinic</span></a>
+      <nav class="site-nav" aria-label="Main">
+        <a data-page-link href="/">Home</a>
+        <a data-page-link href="/treatments">Treatments</a>
+        <a data-page-link href="/your-visit">Your visit</a>
+        <a data-page-link href="/doctors">Doctors</a>
+        <a data-page-link href="/clinics">Clinics</a>
+        <a data-page-link href="/articles">Articles</a>
+        <a data-page-link href="/questions">Questions</a>
+      </nav>
+      <button class="btn btn-primary header-book" type="button" data-book>Request a consultation</button>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-sheet" aria-expanded="false"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg></button>
+    </div>
+  </header>
+
+  <dialog class="nav-sheet" id="nav-sheet" aria-label="Site navigation">
+    <div class="sheet-top">
+      <span class="wordmark" aria-hidden="true">Aurelis<span>Clinic</span></span>
+      <button class="icon-btn" type="button" data-close aria-label="Close menu"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <nav class="sheet-links" aria-label="Main">
+        <a data-page-link href="/">Home</a>
+      <a data-page-link href="/treatments">Treatments</a>
+      <a data-page-link href="/your-visit">Your visit</a>
+      <a data-page-link href="/doctors">Doctors</a>
+      <a data-page-link href="/clinics">Clinics</a>
+        <a data-page-link href="/articles">Articles</a>
+      <a data-page-link href="/questions">Questions</a>
+    </nav>
+    <button class="btn btn-primary btn-block" type="button" data-book>Request a consultation</button>
+  </dialog>
+
+  <main id="main" tabindex="-1">
+    <section class="hero page-view" data-page="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Aesthetic &amp; wellness &middot; Makati &amp; BGC</p>
+        <h1 id="hero-title"><span class="line"><span>Your options,</span></span><span class="line"><span>clearly explained.</span></span></h1>
+        <p class="hero-sub">Explore surgery, skin treatments and stem cell information. Understand the options and limits before you decide what comes next.</p>
+        <form class="starter" id="starter" aria-label="Start a consultation request">
+          <fieldset>
+            <legend>What would you like to discuss?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="start-interest" value="Cosmetic surgery" /><span>Surgery</span></label>
+              <label class="chip"><input type="radio" name="start-interest" value="Skin and injectables" /><span>Skin and injectables</span></label>
+              <label class="chip"><input type="radio" name="start-interest" value="Stem cell information" /><span>Stem cell information</span></label>
+              <label class="chip"><input type="radio" name="start-interest" value="Not sure yet" /><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+          <div class="starter-actions">
+            <button class="btn btn-primary btn-lg" type="submit">Request a consultation <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+            <a class="link-quiet" href="/treatments">Explore treatments</a>
+          </div>
+        </form>
+      </div>
+      <figure class="hero-media contour-media">
+        <img src="/assets/living-contour-thoughts-final.webp" width="1920" height="1080" alt="Final frame from the illustrated entrance: a woman facing left with a relaxed, confident pose." fetchpriority="high" />
+      </figure>
+    </section>
+
+    <section class="menu page-view" data-page="treatments" hidden id="menu" aria-labelledby="menu-title">
+      <div class="menu-top">
+        <div class="menu-head"><h2 id="menu-title">Your treatment guide</h2></div>
+      <div class="tabs-scroll">
+        <div class="tabs" role="tablist" aria-label="Treatment categories">
+          <span class="tab-thumb" aria-hidden="true"></span>
+          <button class="tab" role="tab" id="tab-surgery" aria-controls="menu-panel" aria-selected="true" data-category="surgery">Surgical <span class="count">10</span></button>
+          <button class="tab" role="tab" id="tab-skin" aria-controls="menu-panel" aria-selected="false" tabindex="-1" data-category="skin">Non-surgical <span class="count">9</span></button>
+          <button class="tab" role="tab" id="tab-wellness" aria-controls="menu-panel" aria-selected="false" tabindex="-1" data-category="wellness">Stem cell <span class="count">3</span></button>
+        </div>
+      </div>
+      </div>
+      <p class="menu-note">Times, recovery and sessions are a guide. Your clinician will explain what applies to you.</p>
+
+      <div class="menu-body">
+        <figure class="menu-media">
+          <img id="menu-image" src="/assets/menu-surgical-tall-887.webp" width="887" height="1774" data-category="surgery" loading="lazy" alt="Side-profile portrait of a woman in an ivory top." />
+        </figure>
+        <div class="menu-panel" id="menu-panel" role="tabpanel" aria-labelledby="tab-surgery" tabindex="0">
+          <div class="menu-panel-head">
+            <h3 id="menu-category">Cosmetic surgery</h3>
+            <p id="menu-intro">Face, breast and body procedures. Start with an assessment of your goals and the options that may suit you.</p>
+          </div>
+          <div class="menu-groups" id="menu-groups" role="group" aria-label="Treatment areas"></div>
+          <div class="menu-list" id="menu-list">
+            <noscript>
+              <p class="noscript">Surgical: blepharoplasty, rhinoplasty, buccal fat removal, chin augmentation, breast augmentation, breast lift, breast reduction, liposuction, body contouring, tummy tuck. Non-surgical: NCTF, PRX, Rejuran, biostimulators, Botox, dermal fillers, Ultra V threads, Aqualyx, Lemon Bottle. Stem cell information: cells from your own body, evidence for the proposed use, questions before you decide.</p>
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="visits page-view visit-journey" data-page="visit" hidden id="visits" aria-labelledby="visits-title">
+      <div class="visit-masthead"><div class="visit-introduction"><div class="visits-head"><h2 id="visits-title">Your consultation, step by step</h2><p>Choose in clinic or by video call. Here's how the first conversation works.</p></div><div class="visit-formats" role="group" aria-label="Consultation walkthrough format">
+          <button class="btn" type="button" data-visit-format="clinic" aria-pressed="true" aria-controls="visit-clinic">In clinic</button>
+          <button class="btn" type="button" data-visit-format="video" aria-pressed="false" aria-controls="visit-video">Video call</button>
+        </div></div><figure class="visits-media">
+        <img src="/assets/process-1600.webp" srcset="/assets/process-960.webp 960w, /assets/process-1600.webp 1600w" sizes="100vw" width="1600" height="1067" loading="lazy" alt="Illustrative consultation between a clinician and a patient at a round table." />
+      </figure></div>
+      <div class="journey-process" aria-live="polite" aria-atomic="true"><ol class="steps" id="visit-clinic" data-visit-steps="clinic" aria-label="In-clinic consultation steps" ><li class="step"><span class="step-n">01</span><h3>Request</h3><p>Choose Makati or BGC and a preferred day and time. The appointment needs the clinic's confirmation.</p></li><li class="step"><span class="step-n">02</span><h3>Meet</h3><p>Talk through your goals, medical history and questions. Your clinician assesses what needs a closer look.</p></li><li class="step"><span class="step-n">03</span><h3>Understand</h3><p>Discuss the options, alternatives, risks, recovery and costs. Ask what the proposed plan can and cannot do.</p></li><li class="step"><span class="step-n">04</span><h3>Decide</h3><p>Take time to review the information. If you choose treatment, discuss preparation, aftercare and follow-up before proceeding.</p></li></ol>
+<ol class="steps" id="visit-video" data-visit-steps="video" aria-label="Video call consultation steps" hidden><li class="step"><span class="step-n">01</span><h3>Request</h3><p>Choose Video call and a preferred day and time. A request does not confirm an appointment.</p></li><li class="step"><span class="step-n">02</span><h3>Confirm</h3><p>Once the clinic confirms the appointment, it sends the joining link and instructions.</p></li><li class="step"><span class="step-n">03</span><h3>Join</h3><p>Use a phone, tablet or computer with a camera, microphone and internet. Choose a quiet, private, well-lit space.</p></li><li class="step"><span class="step-n">04</span><h3>Discuss</h3><p>Share your goals and questions. Your clinician explains the next steps, including whether an in-clinic assessment is needed.</p></li></ol></div>
+      <div class="journey-actions"><button class="btn btn-ghost" type="button" id="visit-request" data-book data-format="clinic">Request a consultation</button><a class="link-quiet" href="/articles/first-aesthetic-consultation">Read the first-consultation guide <svg class="i" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></div>
+    </section>
+
+    <section class="doctors page-view" data-page="doctors" hidden id="doctors" aria-labelledby="doctors-title">
+      <div class="doctors-head">
+        <h2 id="doctors-title">Meet the doctors</h2>
+        <p>These names, portraits and profiles are illustrative. The clinic's real team and verified credentials would appear here at launch.</p>
+      </div>
+      <div class="doctor-stage">
+        <figure class="doctor-photo">
+          <img id="doctor-image" src="/assets/doctor-1-800.webp" width="800" height="1000" loading="lazy" alt="Illustrative portrait for Dr. Elena Marceau." />
+        </figure>
+        <div class="doctor-detail" id="doctor-detail" aria-live="polite">
+          <h3 id="doctor-name">Dr. Elena Marceau</h3>
+          <p class="doctor-role" id="doctor-role">Aesthetic surgery</p>
+          <p class="doctor-bio" id="doctor-bio">Discusses face, breast and body procedures, including the alternatives, risks and what to expect before deciding on a plan.</p>
+          <ul class="doctor-focus" id="doctor-focus"><li>Facial assessment</li><li>Breast surgery</li><li>Body contouring</li></ul>
+        </div>
+        <div class="doctor-picker" role="group" aria-label="Choose a doctor">
+          <button class="doctor-pick" type="button" data-doctor="0" aria-pressed="true"><img src="/assets/doctor-1-800.webp" width="800" height="1000" loading="lazy" alt="" /><span><strong>Dr. Elena Marceau</strong><small>Aesthetic surgery</small></span></button>
+          <button class="doctor-pick" type="button" data-doctor="1" aria-pressed="false"><img src="/assets/doctor-2-800.webp" width="800" height="1000" loading="lazy" alt="" /><span><strong>Dr. Adrian Reyes</strong><small>Facial aesthetics</small></span></button>
+          <button class="doctor-pick" type="button" data-doctor="2" aria-pressed="false"><img src="/assets/doctor-3-800.webp" width="800" height="1000" loading="lazy" alt="" /><span><strong>Dr. Isabel Laurent</strong><small>Skin and wellness</small></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="clinics page-view clinic-gallery" data-page="clinics" hidden id="clinics" aria-labelledby="clinics-title">
+      <div class="clinic-gallery-head"><h2 id="clinics-title">Find your clinic</h2><div class="clinic-choices" role="group" aria-label="Choose a clinic">
+        <button class="btn" type="button" data-clinic-choice="makati" aria-pressed="true" aria-controls="clinic-panel-makati">Makati</button>
+        <button class="btn" type="button" data-clinic-choice="bgc" aria-pressed="false" aria-controls="clinic-panel-bgc">BGC</button>
+      </div></div>
+      <div class="clinic-gallery-stage" aria-live="polite" aria-atomic="true"><article class="clinic" id="clinic-panel-makati" data-clinic-panel="makati" aria-labelledby="clinic-makati">
+          <figure><img src="/assets/clinic-makati-1280.webp" srcset="/assets/clinic-makati-960.webp 960w, /assets/clinic-makati-1280.webp 1280w" sizes="(max-width: 760px) 90vw, 500px" width="1280" height="720" loading="eager" alt="Illustrative clinic reception with an oak desk and city views." /></figure>
+          <div class="clinic-body">
+            <h3 id="clinic-makati">The Makati Atelier</h3>
+            <ul class="facts">
+              <li><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg><span><span class="fact-label">Address</span>Ayala Avenue, Makati City<br />Metro Manila</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="fact-label">Hours</span>Monday to Saturday<br />9:00 AM to 6:00 PM</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span><span class="fact-label">Phone</span>+63 2 0000 0000 <small>(placeholder)</small></span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-envelope"/></svg><span><span class="fact-label">Email</span>hello@aurelis.example <small>(placeholder)</small></span></li>
+            </ul>
+            <div class="clinic-actions">
+              <button class="btn btn-ghost" type="button" data-book data-location="makati">Request a consultation</button>
+              <a class="link-quiet" href="https://www.google.com/maps/search/?api=1&amp;query=Ayala+Avenue+Makati+City" target="_blank" rel="noopener noreferrer">Get directions <svg class="i" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+            </div>
+          </div>
+        </article>
+<article class="clinic" id="clinic-panel-bgc" data-clinic-panel="bgc" hidden aria-labelledby="clinic-bgc">
+          <figure><img src="/assets/clinic-bgc-1280.webp" srcset="/assets/clinic-bgc-960.webp 960w, /assets/clinic-bgc-1280.webp 1280w" sizes="(max-width: 760px) 90vw, 500px" width="1280" height="720" loading="eager" alt="Illustrative treatment room with a bed and round mirror." /></figure>
+          <div class="clinic-body">
+            <h3 id="clinic-bgc">The BGC Residence</h3>
+            <ul class="facts">
+              <li><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg><span><span class="fact-label">Address</span>Bonifacio Global City, Taguig<br />Metro Manila</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="fact-label">Hours</span>Monday to Saturday<br />9:00 AM to 6:00 PM</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span><span class="fact-label">Phone</span>+63 2 0000 0000 <small>(placeholder)</small></span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-envelope"/></svg><span><span class="fact-label">Email</span>hello@aurelis.example <small>(placeholder)</small></span></li>
+            </ul>
+            <div class="clinic-actions">
+              <button class="btn btn-ghost" type="button" data-book data-location="bgc">Request a consultation</button>
+              <a class="link-quiet" href="https://www.google.com/maps/search/?api=1&amp;query=Bonifacio+Global+City+Taguig" target="_blank" rel="noopener noreferrer">Get directions <svg class="i" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+            </div>
+          </div>
+        </article></div>
+    </section>
+
+    <section class="page-view questions-layout questions-spread" data-page="questions" hidden id="questions" aria-labelledby="questions-title">
+      <h2 id="questions-title">Before your consultation</h2>
+      <div class="questions-body">
+      <div class="answer-spread">
+        <section class="answer-item" aria-labelledby="answer-title-1"><p class="answer-number">01</p><h3 id="answer-title-1">Do I need to decide at the consultation?</h3>
+          <div class="qa-body"><p>No. Use the conversation to ask questions and understand your options. Take the information away and decide in your own time.</p></div>
+        </section>
+        <section class="answer-item" aria-labelledby="answer-title-2"><p class="answer-number">02</p><h3 id="answer-title-2">What can I discuss in a consultation?</h3>
+          <div class="qa-body"><p>Your goals, medical history and questions. Your clinician will explain the options, alternatives, recovery and risks, including when they would not recommend treatment. You can request an in-clinic or video consultation; an in-clinic assessment may still be needed.</p></div>
+        </section>
+        <section class="answer-item" aria-labelledby="answer-title-3"><p class="answer-number">03</p><h3 id="answer-title-3">Can I ask about stem cell treatments?</h3>
+          <div class="qa-body"><p>Yes. Start with the exact proposal: which cells are involved, the intended use, the evidence, the risks and the local regulatory status. This demo provides general information and makes no claim that a treatment is approved, safe or effective.</p></div>
+        </section>
+        <section class="answer-item" aria-labelledby="answer-title-4"><p class="answer-number">04</p><h3 id="answer-title-4">Does this demo send or save my details?</h3>
+          <div class="qa-body"><p>No. The form only previews a consultation request on screen. It does not send or save your details, book an appointment or start a video call.</p></div>
+        </section>
+      </div>
+    <section class="closing" aria-labelledby="closing-title">
+      <h2 id="closing-title">Start with your questions.</h2>
+      <p>You don't need to have a treatment in mind.</p>
+      <button class="btn btn-primary btn-lg" type="button" data-book>Request a consultation <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+    </section>
+      </div>
+    </section>
+
+    <section class="articles page-view editorial-listing" data-page="articles" hidden aria-labelledby="articles-title">
+      <div class="articles-head"><h2 id="articles-title">A little clarity before you decide</h2><p>Practical guides to consultations, treatment questions and planning your next step.</p></div>
+      <article class="article-feature editorial-feature" aria-labelledby="guide-title">
+        <div class="article-feature-copy"><p class="article-label"><span class="editorial-index">01</span> Consultation guide</p><h3 id="guide-title">Your first aesthetic consultation: what to expect</h3><p>What to prepare, how video and in-clinic appointments differ, and the questions worth bringing with you.</p><a class="btn btn-primary" href="/articles/first-aesthetic-consultation">Read the guide <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+      </article>
+    </section>
+    <article class="article-page page-view" data-page="article" hidden aria-labelledby="article-title">
+      <a class="link-quiet article-back" href="/articles"><svg class="i" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back to articles</a>
+      <header class="article-header"><p class="article-label">Consultation guide</p><h1 id="article-title">Your first aesthetic consultation: what to expect</h1><p class="article-standfirst">You can start with questions, even if you haven't chosen a treatment. Here's what to prepare and what to discuss, in clinic or by video call.</p><p class="article-byline">Written by heynuff for this design demonstration.<br /><time datetime="2026-10-21">21 October 2026</time></p></header>
+      <div class="article-content"><p>Your first aesthetic consultation is a chance to explain what you have in mind and understand the options. You might be considering surgery, a skin treatment or simply wondering where to begin. You don't need to arrive with a procedure already chosen.</p>
+<p>The useful outcome is a clearer picture of the next step, including what still needs assessing. Here is a practical way to prepare for that conversation.</p>
+<h2>Start with what matters to you</h2>
+<p>Describe the concern in your own words. What would you like to change? What would you prefer to keep? If something about a treatment worries you, bring that up too.</p>
+<p>Write down your questions before the appointment. A short list makes it easier to remember the things that matter when you're talking through unfamiliar options. Ask for an explanation whenever a term or recommendation is unclear. <a href="https://www.plasticsurgery.org/news/blog/plastic-surgery-consultation-tips">ASPS's consultation tips</a> also encourage preparing concerns and questions in advance.</p>
+<h2>Bring the information your clinician needs</h2>
+<p>Be ready to discuss your medical history, allergies, medicines and supplements, plus any previous cosmetic treatments. Make a note beforehand if you're likely to forget a name or date.</p>
+<p>Ask the clinic whether it needs anything else before you arrive or join the call. Give health information through the process the clinic specifies. The request form in this demo is only a preview; it is not a place to send medical records.</p>
+<p>For skin consultations, the <a href="https://www.plasticsurgery.org/cosmetic-procedures/skin-rejuvenation-and-resurfacing/consultation">ASPS consultation guidance</a> describes discussing goals, health history, medicines and previous treatments as part of the assessment.</p>
+<h2>Choose in clinic or by video call</h2>
+<p>An in-clinic appointment gives the clinician an opportunity to examine the relevant area in person. A video consultation can be a starting point for discussing your goals, history and questions. Ask the clinic what it can assess remotely and whether you will also need an in-person visit.</p>
+<p>For a video appointment, confirm how you will receive the joining instructions. Have a phone, tablet or computer with a working camera and microphone, an internet connection and a quiet, private, well-lit space. These are also the practical basics in the <a href="https://www.nhs.uk/nhs-services/gps/video-consultations/">NHS video-consultation guide</a>.</p>
+<p>Check the link and any instructions before the scheduled time. Ask the clinic who to contact if you cannot connect. The exact platform and arrangements depend on the clinic; selecting Video call in this demo does not create a real appointment or joining link.</p>
+<h2>Ask about the whole plan</h2>
+<p>Understanding an option means more than knowing its name. Useful questions include:</p>
+<ul><li>Why are you suggesting this option for my concern?</li><li>What alternatives should I consider, including having no treatment?</li><li>What results are realistic, and what are the limits?</li><li>What risks or complications should I understand?</li><li>What preparation, recovery time and follow-up might be involved?</li><li>What is included in the cost, and what could be additional?</li><li>What training and qualifications are relevant, and how can I check them?</li><li>Who should I contact if I have concerns afterwards?</li></ul>
+<p>If surgery is being discussed, ask where it would take place and who would provide the anaesthesia. The <a href="https://www.plasticsurgery.org/documents/holidays/2024/Consultation-Checklist.pdf">ASPS consultation checklist</a> is another useful prompt for questions about the surgeon, procedure and aftercare.</p>
+<h2>Leave with a next step you understand</h2>
+<p>Before the conversation ends, ask what happens next. You may need another assessment, more information or time to think. If you are considering treatment, ask for the proposed plan, costs and preparation in writing.</p>
+<p>You can review the information, raise further questions or seek another opinion before deciding. A consultation request is a step towards understanding your options; it does not mean you've agreed to treatment.</p>
+<p>At Aurelis, the demo lets you explore a request for Makati, BGC or a video consultation. To compare the available information first, <a href="/treatments">explore the treatment guide</a>. To see the proposed appointment process, <a href="/your-visit">read how consultations work</a>.</p>
+<p class="article-prompt">Ready to start with your questions?</p>
+<button class="btn btn-primary" type="button" data-book>Request a consultation</button>
+<p class="article-disclosure">General information for this design demonstration. It does not assess whether a treatment is suitable for you. The clinic must review the article and its service details before launch.</p></div>
+      <a class="link-quiet article-next" href="/your-visit">See how consultations work <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </article>
+  </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a class="wordmark" href="/">Aurelis<span>Clinic</span></a>
+      <nav aria-label="Footer">
+        <a data-page-link href="/">Home</a>
+        <a data-page-link href="/treatments">Treatments</a>
+        <a data-page-link href="/your-visit">Your visit</a>
+        <a data-page-link href="/doctors">Doctors</a>
+        <a data-page-link href="/clinics">Clinics</a>
+        <a data-page-link href="/articles">Articles</a>
+        <a data-page-link href="/questions">Questions</a>
+      </nav>
+    </div>
+    <p class="footer-note">Design demo by heynuff. Names, images and contact details are placeholders. No medical service is offered through this site. Treatment information is general and needs the clinic's review before launch.</p>
+    <p class="footer-legal">&copy; <span id="year">2026</span> Aurelis Clinic</p>
+  </footer>
+
+  <dialog class="booking" id="booking" aria-labelledby="booking-heading-1">
+    <div class="sheet-grab" aria-hidden="true"><span></span></div>
+    <form id="booking-form" novalidate>
+      <div class="booking-top">
+        <ol class="booking-progress" aria-label="Progress">
+          <li class="is-current" aria-current="step">Interest</li>
+          <li>Details</li>
+          <li>Review</li>
+        </ol>
+        <button class="icon-btn" type="button" data-close aria-label="Close consultation request"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+
+      <div class="booking-step" data-step="1">
+        <h2 id="booking-heading-1" tabindex="-1">What would you like to discuss?</h2>
+        <p>Choose the closest match. It's fine if you're still exploring.</p>
+        <fieldset class="interest-list">
+          <legend class="sr-only">Area of interest</legend>
+          <label class="option"><input type="radio" name="interest" value="Cosmetic surgery" /><span><strong>Surgery</strong><small>Face, breast and body procedures</small></span></label>
+          <label class="option"><input type="radio" name="interest" value="Skin and injectables" /><span><strong>Skin and injectables</strong><small>Skin treatments, injectables and contouring</small></span></label>
+          <label class="option"><input type="radio" name="interest" value="Stem cell information" /><span><strong>Stem cell information</strong><small>Understand the proposal, evidence and risks</small></span></label>
+          <label class="option"><input type="radio" name="interest" value="Not sure yet" /><span><strong>Not sure yet</strong><small>Start with your questions</small></span></label>
+        </fieldset>
+        <p class="field-error" id="interest-error" role="alert"></p>
+        <div class="booking-actions">
+          <button class="btn btn-primary" type="button" data-next>Continue <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </div>
+
+      <div class="booking-step" data-step="2" hidden>
+        <h2 id="booking-heading-2" tabindex="-1">How would you like to meet?</h2>
+        <p>Choose in clinic or by video call, then a preferred day and time. This is a request, not a confirmed appointment.</p>
+        <div class="fields">
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="e-name" />
+            <p class="field-error" id="e-name"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email address</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="150" aria-describedby="e-email" />
+            <p class="field-error" id="e-email"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">Mobile number <span class="optional">(optional)</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="+63 9XX XXX XXXX" />
+          </div>
+          <fieldset class="field">
+            <legend>Consultation format</legend>
+            <div class="segmented">
+              <label><input type="radio" name="format" value="clinic" checked /><span>In clinic</span></label>
+              <label><input type="radio" name="format" value="video" /><span>Video call</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field" id="consultation-clinic">
+            <legend>Clinic</legend>
+            <div class="segmented">
+              <label><input type="radio" name="location" value="makati" checked /><span>Makati</span></label>
+              <label><input type="radio" name="location" value="bgc" /><span>BGC</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="f-date">Preferred day</label>
+            <input id="f-date" name="date" type="date" required aria-describedby="h-date e-date" />
+            <p class="field-help" id="h-date">Monday to Saturday</p>
+            <p class="field-error" id="e-date"></p>
+          </div>
+          <div class="field">
+            <label for="f-time">Preferred time</label>
+            <div class="select-wrap">
+              <select id="f-time" name="time" required aria-describedby="e-time">
+                <option value="">Choose a time</option>
+                <option>Morning, 9:00 AM–12:00 PM</option>
+                <option>Early afternoon, 12:00–3:00 PM</option>
+                <option>Late afternoon, 3:00–6:00 PM</option>
+              </select>
+              <svg class="i" aria-hidden="true"><use href="#i-caret-down"/></svg>
+            </div>
+            <p class="field-error" id="e-time"></p>
+          </div>
+        </div>
+        <label class="consent"><input type="checkbox" name="consent" required aria-describedby="e-consent" /><span>I understand this is a demo. Nothing will be sent or saved.</span></label>
+        <p class="field-error" id="e-consent"></p>
+        <div class="booking-actions">
+          <button class="btn btn-text" type="button" data-back><svg class="i" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</button>
+          <button class="btn btn-primary" type="submit">Review request</button>
+        </div>
+      </div>
+
+      <div class="booking-step booking-done" data-step="3" hidden>
+        <div class="send-stage" id="send-stage">
+          <div class="send-review" id="send-review">
+            <span class="done-mark" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>
+            <h2 id="booking-heading-3" tabindex="-1">Review your request</h2>
+            <dl class="summary" id="booking-summary"></dl>
+            <p>Check your details, then preview sending your request. Nothing will be sent or saved.</p>
+          </div>
+          <div class="send-confirmation" id="send-confirmation" hidden role="status">
+            <span class="done-mark" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>
+            <h2 id="send-heading-sent" tabindex="-1">Demo request sent</h2>
+            <p>This was a preview. Nothing was sent or saved, and no appointment was booked. On a live site, the clinic would contact you to confirm your request.</p>
+          </div>
+        </div>
+        <div class="booking-actions">
+          <button class="btn btn-primary" type="button" data-send>Send</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

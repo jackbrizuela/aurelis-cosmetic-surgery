@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.netlify/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+_archive/
+_to_delete/
+.claude/
+.impeccable/
+assets/originals/
+assets/source/
+video/
+*.tgz
+ChatGPT Image*.png
+docs/*.mp4

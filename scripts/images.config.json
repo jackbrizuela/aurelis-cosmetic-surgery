@@ -1,0 +1,121 @@
+{
+  "hero": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      640,
+      1200
+    ],
+    "position": "top"
+  },
+  "menu-surgical": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      1000
+    ]
+  },
+  "menu-skin": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      1000
+    ]
+  },
+  "menu-stemcell": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      1000
+    ]
+  },
+  "process": {
+    "ratio": [
+      3,
+      2
+    ],
+    "widths": [
+      960,
+      1600
+    ]
+  },
+  "doctor-1": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      800
+    ],
+    "position": "top"
+  },
+  "doctor-2": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      800
+    ],
+    "position": "top"
+  },
+  "doctor-3": {
+    "ratio": [
+      4,
+      5
+    ],
+    "widths": [
+      800
+    ],
+    "position": "top"
+  },
+  "clinic-makati": {
+    "ratio": [
+      16,
+      9
+    ],
+    "widths": [
+      960,
+      1280
+    ]
+  },
+  "clinic-bgc": {
+    "ratio": [
+      16,
+      9
+    ],
+    "widths": [
+      960,
+      1280
+    ]
+  },
+  "menu-surgical-tall": {
+    "ratio": [
+      1,
+      2
+    ],
+    "widths": [
+      887
+    ],
+    "position": "top"
+  },
+  "home-art": {
+    "ratio": [
+      4,
+      3
+    ],
+    "widths": [
+      640,
+      1448
+    ],
+    "position": "centre"
+  }
+}
