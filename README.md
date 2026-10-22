@@ -2,11 +2,13 @@
 
 A fictional aesthetic and wellness clinic demo by heynuff. Seven pages and an article reader share a sculpted grey interface, with tactile controls and a ten-second illustrated entrance.
 
+[Live demo](https://aurelis-cosmetic-surgery.netlify.app) · [Source](https://github.com/jackbrizuela/aurelis-cosmetic-surgery)
+
 ![Your visit page](docs/images/your-visit.png)
 
 ## Run locally
 
-Requires Node.js 24 and pnpm. Dependencies are pinned in pnpm-lock.yaml.
+Requires Node.js 24 and pnpm 11.25.0. Dependencies are pinned in pnpm-lock.yaml; the project permits Sharp's required install script in pnpm-workspace.yaml.
 
 ```sh
 pnpm install --frozen-lockfile
